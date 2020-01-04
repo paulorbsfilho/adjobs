@@ -27,12 +27,37 @@ export class AuthService {
       map((res: Response) => res.headers.get('Authorization').substring(7)));
   }
 
-  doRegister(registerCredentials): Observable<any> {
-    return this.http.post(Url.ADDRESS + Url.REGISTER,
+  doEmployerRegister(registerEmployerCredentials): Observable<any> {
+    return this.http.post(Url.ADDRESS + Url.REGISTER_EMPLOYER,
       {
-        email: registerCredentials.email,
-        name: registerCredentials.name,
-        password: registerCredentials.password
+        username: registerEmployerCredentials.username,
+        email: registerEmployerCredentials.email,
+        password: registerEmployerCredentials.password,
+        firstName: registerEmployerCredentials.firstName,
+        lastName: registerEmployerCredentials.lastName,
+        phone: registerEmployerCredentials.phone,
+        companyName: registerEmployerCredentials.companyName,
+        catchPhrase: registerEmployerCredentials.catchPhrase,
+        about: registerEmployerCredentials.about
+      },
+      this.options).pipe(
+      map((res: Response) => res.json().body),
+      catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
+  }
+
+  doCandidateRegister(registerCandidateCredentials): Observable<any> {
+    return this.http.post(Url.ADDRESS + Url.REGISTER_CANDIDATE,
+      {
+        username: registerCandidateCredentials.username,
+        email: registerCandidateCredentials.email,
+        password: registerCandidateCredentials.password,
+        firstName: registerCandidateCredentials.firstName,
+        lastName: registerCandidateCredentials.lastName,
+        phone: registerCandidateCredentials.phone,
+        academicFormation: registerCandidateCredentials.academicFormation,
+        institution: registerCandidateCredentials.institution,
+        bio: registerCandidateCredentials.bio,
+        knowledge: registerCandidateCredentials.knowledge
       },
       this.options).pipe(
       map((res: Response) => res.json().body),
