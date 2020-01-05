@@ -1,1 +1,10 @@
-<p>employer-detail works!</p>
+<div *ngIf="employer">
+  <h2>{{employer.firstName | uppercase}} Details</h2>
+  <div><span>id: </span>{{employer.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="employer.firstName" placeholder="Employer name"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+</div>

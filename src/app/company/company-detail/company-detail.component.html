@@ -1,1 +1,10 @@
-<p>company-detail works!</p>
+<div *ngIf="company">
+  <h2>{{company.companyName | uppercase}} Details</h2>
+  <div><span>id: </span>{{company.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="company.companyName" placeholder="Company name"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+</div>

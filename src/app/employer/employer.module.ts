@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EmployerComponent } from './employer/employer.component';
 import { EmployerRoutingModule } from './employer-routing.module';
 import { EmployerDetailComponent } from './employer-detail/employer-detail.component';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -10,7 +11,8 @@ import { EmployerDetailComponent } from './employer-detail/employer-detail.compo
   declarations: [EmployerComponent, EmployerDetailComponent],
   imports: [
     CommonModule,
-    EmployerRoutingModule
+    EmployerRoutingModule,
+    FormsModule
   ],
   exports: [EmployerComponent, EmployerDetailComponent]
 })
