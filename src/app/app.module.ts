@@ -10,22 +10,16 @@ import {OAuthModule} from 'angular-oauth2-oidc';
 
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 
-import {HomeComponent} from './home/home/home.component';
-import {EmployerComponent} from './employer/employer/employer.component';
-import {CandidateComponent} from './candidate/candidate/candidate.component';
-import {CompanyComponent} from './company/company/company.component';
-import {AdvertisementJobComponent} from './advertisement-job/advertisement-job/advertisement-job.component';
+import {EmployerModule} from './employer/employer.module';
+import {CompanyModule} from './company/company.module';
+import {CandidateModule} from './candidate/candidate.module';
+import {AdvertisementJobModule} from './advertisement-job/advertisement-job.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    EmployerComponent,
-    CandidateComponent,
-    CompanyComponent,
-    AdvertisementJobComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +28,10 @@ import {AdvertisementJobComponent} from './advertisement-job/advertisement-job/a
     HttpClientModule,
     OAuthModule.forRoot(),
     Ng4LoadingSpinnerModule.forRoot(),
+    EmployerModule,
+    CompanyModule,
+    CandidateModule,
+    AdvertisementJobModule
   ],
   providers: [],
   bootstrap: [AppComponent]
