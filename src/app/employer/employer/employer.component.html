@@ -1,1 +1,8 @@
-<p>employer works!</p>
+<h2>Employers</h2>
+<ul class="employers">
+  <li *ngFor="let employer of employers">
+    <a routerLink="/detail/{{employer.id}}">
+      <span class="badge">{{employer.id}}</span> {{employer.firstName}}
+    </a>
+  </li>
+</ul>

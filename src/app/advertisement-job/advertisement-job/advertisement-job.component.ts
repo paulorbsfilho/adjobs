@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AdvertisementJob} from '../../models/advertisement-job';
+import {AdvertisementJobService} from '../advertisement-job.service';
+
 
 @Component({
   selector: 'app-advertisement-job',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvertisementJobComponent implements OnInit {
 
-  constructor() { }
+  selectedAdvertisementJob: AdvertisementJob;
+  advertisementJobs: AdvertisementJob[];
 
-  ngOnInit() {
+  constructor(private advertisementJobService: AdvertisementJobService) {
   }
 
+  ngOnInit() {
+    this.getAdvertisementJobs();
+  }
+
+  onSelect(advertisementJob: AdvertisementJob): void {
+    this.selectedAdvertisementJob = advertisementJob;
+  }
+
+  getAdvertisementJobs(): void {
+    this.advertisementJobService.getAdvertisementJobs()
+      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
+  }
 }

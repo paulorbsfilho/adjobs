@@ -1,1 +1,8 @@
-<p>advertisement-job works!</p>
+<h2>Advertisement Jobs</h2>
+<ul class="advertisementJobs">
+  <li *ngFor="let advertisementJob of advertisementJobs">
+    <a routerLink="/detail/{{advertisementJob.id}}">
+      <span class="badge">{{advertisementJob.id}}</span> {{advertisementJob.title}}
+    </a>
+  </li>
+</ul>

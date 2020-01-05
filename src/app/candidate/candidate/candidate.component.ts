@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Candidate} from '../../models/candidate';
+import {CandidateService} from '../candidate.service';
 
 @Component({
   selector: 'app-candidate',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./candidate.component.css']
 })
 export class CandidateComponent implements OnInit {
+  selectedCandidate: Candidate;
+  candidates: Candidate[];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private candidateService: CandidateService) {
   }
 
+  ngOnInit() {
+    this.getCompanies();
+  }
+
+  onSelect(candidate: Candidate): void {
+    this.selectedCandidate = candidate;
+  }
+
+  getCompanies(): void {
+    this.candidateService.getCandidates()
+      .subscribe(candidates => this.candidates = candidates);
+  }
 }

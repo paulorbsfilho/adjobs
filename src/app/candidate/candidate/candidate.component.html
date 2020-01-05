@@ -1,1 +1,8 @@
-<p>candidate works!</p>
+<h2>Candidates</h2>
+<ul class="heroes">
+  <li *ngFor="let candidate of candidates">
+    <a routerLink="/detail/{{candidate.id}}">
+      <span class="badge">{{candidate.id}}</span> {{candidate.firstName}}
+    </a>
+  </li>
+</ul>

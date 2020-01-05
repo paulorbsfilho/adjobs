@@ -1,31 +1,41 @@
 import {Injectable} from '@angular/core';
-import {Headers, RequestOptions, Response, Http, RequestMethod} from '@angular/http';
 import {Observable, throwError as observableThrowError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {Url} from '../utils/urls';
+import {Url, HEADERS_COMMUN} from '../utils/urls';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  urls = Url;
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
-  headers: Headers;
-  options: RequestOptions;
-
-  constructor(private http: Http) {
-    this.headers = new Headers(
-      {
-        'Content-Type': 'application/json',
-      });
-    this.options = new RequestOptions({headers: this.headers});
-  }
+  constructor(private http: HttpClient) { }
 
   doLogin(loginCredentials): Observable<any> {
-    const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
-    const options = new RequestOptions({method: RequestMethod.Post, headers: headers});
-    return this.http.post(Url.ADDRESS + Url.LOGIN, loginCredentials, options).pipe(
+    return this.http.post(Url.ADDRESS + Url.LOGIN, loginCredentials, this.httpOptions).pipe(
       map((res: Response) => res.headers.get('Authorization').substring(7)));
   }
+
+  // login(username: string, password: string): Observable<any> {
+  //   const params = new HttpParams()
+  //     .set('username', username)
+  //     .set('password', password)
+  //     .set('grant_type', 'password');
+  //   const options = {
+  //     headers: HEADERS_COMMUN,
+  //     params
+  //   };
+  //
+  //   return this.http.post<any>(this, params,
+  //     {
+  //       headers: new HttpHeaders().append('Authorization',
+  //         'Basic ' + btoa(`${this.config.config.clientId}:${this.config.config.clientSecret}`)),
+  //     });
+  // }
 
   doEmployerRegister(registerEmployerCredentials): Observable<any> {
     return this.http.post(Url.ADDRESS + Url.REGISTER_EMPLOYER,
@@ -40,8 +50,8 @@ export class AuthService {
         catchPhrase: registerEmployerCredentials.catchPhrase,
         about: registerEmployerCredentials.about
       },
-      this.options).pipe(
-      map((res: Response) => res.json().body),
+      this.httpOptions).pipe(
+      map((res: Response) => res.body),
       catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
   }
 
@@ -59,8 +69,8 @@ export class AuthService {
         bio: registerCandidateCredentials.bio,
         knowledge: registerCandidateCredentials.knowledge
       },
-      this.options).pipe(
-      map((res: Response) => res.json().body),
+      this.httpOptions).pipe(
+      map((res: Response) => res.body),
       catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
   }
 }

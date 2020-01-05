@@ -1,1 +1,8 @@
-<p>company works!</p>
+<h2>Companies</h2>
+<ul class="companies">
+  <li *ngFor="let company of companies">
+    <a routerLink="/detail/{{company.id}}">
+      <span class="badge">{{company.id}}</span> {{company.companyName}}
+    </a>
+  </li>
+</ul>
