@@ -3,14 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company/company.component';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
 
 
 @NgModule({
-  declarations: [CompanyComponent],
+  declarations: [CompanyComponent, CompanyDetailComponent],
   imports: [
     CommonModule,
     CompanyRoutingModule
   ],
-  exports: [CompanyComponent]
+  exports: [CompanyComponent, CompanyDetailComponent]
 })
 export class CompanyModule { }
