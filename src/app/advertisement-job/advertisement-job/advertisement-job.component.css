@@ -4,6 +4,17 @@
   padding: 0;
   width: 15em;
 }
+.advertisementJob h2{
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+.advertisementJob li a{
+  text-decoration: none;
+  margin-top: 5px;
+  display: inline-block;
+  color: #334953;
+}
 .advertisementJob li {
   cursor: pointer;
   position: relative;
@@ -27,17 +38,17 @@
   background-color: #BBD8DC;
   color: white;
 }
-.advertisementJob .badge {
-  display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color:#405061;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  margin-right: .8em;
-  border-radius: 4px 0 0 4px;
-}
+/*.advertisementJob .badge {*/
+/*  display: inline-block;*/
+/*  font-size: small;*/
+/*  color: white;*/
+/*  padding: 0.8em 0.7em 0 0.7em;*/
+/*  background-color:#405061;*/
+/*  line-height: 1em;*/
+/*  position: relative;*/
+/*  left: -1px;*/
+/*  top: -4px;*/
+/*  height: 1.8em;*/
+/*  margin-right: .8em;*/
+/*  border-radius: 4px 0 0 4px;*/
+/*}*/

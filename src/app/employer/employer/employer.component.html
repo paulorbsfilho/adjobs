@@ -1,6 +1,6 @@
 <h2>Employers</h2>
 <ul class="employers">
-  <li *ngFor="let employer of employers">
+  <li *ngFor="let employer of employers.results">
     <a routerLink="/detail/{{employer.id}}">
       <span class="badge">{{employer.id}}</span> {{employer.firstName}}
     </a>

@@ -1,6 +1,6 @@
 <h2>Candidates</h2>
 <ul class="heroes">
-  <li *ngFor="let candidate of candidates">
+  <li *ngFor="let candidate of candidates.results">
     <a routerLink="/detail/{{candidate.id}}">
       <span class="badge">{{candidate.id}}</span> {{candidate.firstName}}
     </a>

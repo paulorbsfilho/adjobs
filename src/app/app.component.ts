@@ -4,9 +4,9 @@ import {Router} from '@angular/router';
 import {AdvertisementJobService} from './advertisement-job/advertisement-job.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Oauth2Response} from './auth/oauth2Response';
-import {JwksValidationHandler, OAuthModule, OAuthService} from 'angular-oauth2-oidc';
+import {JwksValidationHandler, OAuthService} from 'angular-oauth2-oidc';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {Url} from './utils/urls';
+import {AdvertisementJob} from './models/advertisement-job';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,9 @@ import {Url} from './utils/urls';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  selectedAdvertisementJob: AdvertisementJob;
+  advertisementJobs: AdvertisementJob[];
+
   oauth2Token: string;
   oauth2TokenResponse: Oauth2Response;
   title = 'ADJobs';
@@ -38,6 +41,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getAdvertisementJobs();
     this.oauth2Token = window.localStorage.getItem('oauth2');
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
@@ -96,6 +100,12 @@ export class AppComponent implements OnInit {
   //   );
   // }
 
+  onSelect(advertisementJob: AdvertisementJob): void {
+    this.selectedAdvertisementJob = advertisementJob;
+  }
 
-
+  getAdvertisementJobs(): void {
+    this.advertisementJobService.getAdvertisementJobs()
+      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
+  }
 }

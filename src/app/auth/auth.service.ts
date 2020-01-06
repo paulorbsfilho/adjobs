@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError as observableThrowError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {Url, HEADERS_COMMUN} from '../utils/urls';
+import {Url, LOGIN, REGISTER_EMPLOYER, REGISTER_CANDIDATE} from '../utils/urls';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   doLogin(loginCredentials): Observable<any> {
-    return this.http.post(Url.ADDRESS + Url.LOGIN, loginCredentials, this.httpOptions).pipe(
+    return this.http.post(LOGIN, loginCredentials, this.httpOptions).pipe(
       map((res: Response) => res.headers.get('Authorization').substring(7)));
   }
 
@@ -26,7 +26,7 @@ export class AuthService {
   //     .set('password', password)
   //     .set('grant_type', 'password');
   //   const options = {
-  //     headers: HEADERS_COMMUN,
+  //     headers: HEADERS_COMMON,
   //     params
   //   };
   //
@@ -38,7 +38,7 @@ export class AuthService {
   // }
 
   doEmployerRegister(registerEmployerCredentials): Observable<any> {
-    return this.http.post(Url.ADDRESS + Url.REGISTER_EMPLOYER,
+    return this.http.post(REGISTER_EMPLOYER,
       {
         username: registerEmployerCredentials.username,
         email: registerEmployerCredentials.email,
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   doCandidateRegister(registerCandidateCredentials): Observable<any> {
-    return this.http.post(Url.ADDRESS + Url.REGISTER_CANDIDATE,
+    return this.http.post(REGISTER_CANDIDATE,
       {
         username: registerCandidateCredentials.username,
         email: registerCandidateCredentials.email,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Url} from '../utils/urls';
+import {CANDIDATES_LIST} from '../utils/urls';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Candidate} from '../models/candidate';
@@ -11,17 +11,16 @@ import {Candidate} from '../models/candidate';
 export class CandidateService {
 
   constructor(private http: HttpClient) { }
-  urls = Url;
 
   getCandidates(): Observable<Candidate[]> {
-    return this.http.get<Candidate[]>(this.urls.ADDRESS + this.urls.CANDIDATES_LIST)
+    return this.http.get<Candidate[]>(CANDIDATES_LIST)
       .pipe(
         catchError(this.handleError<Candidate[]>('getCandidates', []))
       );
   }
 
   getCandidateNo404<Data>(id: number): Observable<Candidate> {
-    const url = `${this.urls.ADDRESS + this.urls.CANDIDATES_LIST}/?id=${id}`;
+    const url = `${CANDIDATES_LIST}/?id=${id}`;
     return this.http.get<Candidate[]>(url)
       .pipe(
         map(candidates => candidates[0]),
@@ -30,7 +29,7 @@ export class CandidateService {
   }
 
   getCandidate(id: number): Observable<Candidate> {
-    const url = `${this.urls.ADDRESS + this.urls.CANDIDATES_LIST}/${id}`;
+    const url = `${CANDIDATES_LIST}/${id}`;
     return this.http.get<Candidate>(url).pipe(
       catchError(this.handleError<Candidate>(`getCandidate id=${id}`))
     );
