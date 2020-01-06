@@ -4,6 +4,7 @@ import {Employer} from '../models/employer';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {EMPLOYERS_LIST} from '../utils/urls';
+import {EmployerResponse} from '../models/employer-response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,13 @@ export class EmployerService {
     return this.http.get<Employer[]>(EMPLOYERS_LIST)
       .pipe(
         catchError(this.handleError<Employer[]>('getHeroes', []))
+      );
+  }
+
+  getEmployersResponse(): Observable<EmployerResponse> {
+    return this.http.get<EmployerResponse>(EMPLOYERS_LIST)
+      .pipe(
+        catchError(this.handleError<EmployerResponse>('getHeroes'))
       );
   }
 

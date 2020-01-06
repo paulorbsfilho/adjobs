@@ -4,6 +4,7 @@ import {CANDIDATES_LIST} from '../utils/urls';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Candidate} from '../models/candidate';
+import {CandidateResponse} from '../models/candidate-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class CandidateService {
     return this.http.get<Candidate[]>(CANDIDATES_LIST)
       .pipe(
         catchError(this.handleError<Candidate[]>('getCandidates', []))
+      );
+  }
+
+  getCandidatesResponse(): Observable<CandidateResponse> {
+    return this.http.get<CandidateResponse>(CANDIDATES_LIST)
+      .pipe(
+        catchError(this.handleError<CandidateResponse>('getCandidates'))
       );
   }
 

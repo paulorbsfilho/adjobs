@@ -4,6 +4,7 @@ import {Company} from '../models/company';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {COMPANIES_LIST} from '../utils/urls';
+import {CompanyResponse} from '../models/company-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class CompanyService {
     return this.http.get<Company[]>(COMPANIES_LIST)
       .pipe(
         catchError(this.handleError<Company[]>('getCompanies', []))
+      );
+  }
+
+  getCompaniesResponse(): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(COMPANIES_LIST)
+      .pipe(
+        catchError(this.handleError<CompanyResponse>('getCompanies'))
       );
   }
 

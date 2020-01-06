@@ -1,5 +1,5 @@
 export class Company {
-  id: number;
+  pk: number;
   companyName: string;
   catchPhrase: string;
   about: string;

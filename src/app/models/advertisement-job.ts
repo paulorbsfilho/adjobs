@@ -1,5 +1,5 @@
 export class AdvertisementJob {
-  id: number;
+  pk: number;
   title: string;
   description: string;
   requirements: string;

@@ -4,6 +4,7 @@ import {Observable, of} from 'rxjs';
 import {JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
 import {catchError, map} from 'rxjs/operators';
 import {AdvertisementJob} from '../models/advertisement-job';
+import {AdvertisementJobResponse} from '../models/advertisement-job-response';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,14 @@ export class AdvertisementJobService {
         catchError(this.handleError<AdvertisementJob[]>('getAdvertisementJobs', [])
       )
     );
+  }
+
+  getAdvertisementJobsResponse(): Observable<AdvertisementJobResponse> {
+    return this.http.get<AdvertisementJobResponse>(JOB_ADVERTISEMENTS_LIST)
+      .pipe(
+        catchError(this.handleError<AdvertisementJobResponse>('getAdvertisementJobs')
+        )
+      );
   }
 
   getAdvertisementJobsNo404<Data>(id: number): Observable<AdvertisementJob> {

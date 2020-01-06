@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {EmployerService} from '../../employer/employer.service';
 import {Location} from '@angular/common';
 import {AdvertisementJob} from '../../models/advertisement-job';
 import {AdvertisementJobService} from '../advertisement-job.service';
