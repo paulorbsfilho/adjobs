@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
     }
 
   redirectToHome() {
-    this.route.navigateByUrl('/home');
+    this.route.navigateByUrl('/');
   }
 
   goHome() {
-    if (true) {
+    if (this.advertisementJobsResponse) {
       this.redirectToHome();
     }
   }
