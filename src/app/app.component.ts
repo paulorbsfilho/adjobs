@@ -1,10 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from './auth/auth.service';
 import {Router} from '@angular/router';
 import {AdvertisementJobService} from './advertisement-job/advertisement-job.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {JwksValidationHandler, OAuthService} from 'angular-oauth2-oidc';
-import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {AdvertisementJob} from './models/advertisement-job';
 import {AdvertisementJobResponse} from './models/advertisement-job-response';
 
