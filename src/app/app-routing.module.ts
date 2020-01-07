@@ -9,11 +9,11 @@ import {EmployerDetailComponent} from './employer/employer-detail/employer-detai
 import {CandidateDetailComponent} from './candidate/candidate-detail/candidate-detail.component';
 import {AdvertisementJobDetailComponent} from './advertisement-job/advertisement-job-detail/advertisement-job-detail.component';
 import {CompanyDetailComponent} from './company/company-detail/company-detail.component';
-import {AppComponent} from './app.component';
+import {AuthComponent} from './auth/auth/auth.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', component: AppComponent},
-  {path: 'home', component: HomeComponent},
+  {path: '', component: HomeComponent},
+  {path: 'auth', component: AuthComponent},
   {path: 'employers', component: EmployerComponent},
   {path: 'employers/detail/:id', component: EmployerDetailComponent},
   {path: 'candidates', component: CandidateComponent},

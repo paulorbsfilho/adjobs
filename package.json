@@ -25,7 +25,8 @@
     "rxjs": "~6.5.4",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1",
-    "ng4-loading-spinner": "latest"
+    "ng4-loading-spinner": "latest",
+    "ngx-smart-modal": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.21",

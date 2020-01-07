@@ -20,6 +20,11 @@ export class AuthService {
       map((res: Response) => res.headers.get('Authorization').substring(7)));
   }
 
+  getToken(loginCredentials): Observable<any> {
+    return this.http.post(LOGIN, loginCredentials, this.httpOptions).pipe(
+      map((res: Response) => res.headers.get('Authorization').substring(7)));
+  }
+
   // login(username: string, password: string): Observable<any> {
   //   const params = new HttpParams()
   //     .set('username', username)

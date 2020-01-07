@@ -20,12 +20,14 @@ import {CandidateComponent} from './candidate/candidate/candidate.component';
 import {CompanyComponent} from './company/company/company.component';
 import {AdvertisementJobComponent} from './advertisement-job/advertisement-job/advertisement-job.component';
 import {HomeModule} from './home/home.module';
+import { AuthComponent } from './auth/auth/auth.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    AuthComponent,
     // HomeComponent,
     // EmployerComponent,
     // CandidateComponent,
@@ -46,7 +48,8 @@ import {HomeModule} from './home/home.module';
     AdvertisementJobModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [AuthComponent]
 })
 export class AppModule {
 }
