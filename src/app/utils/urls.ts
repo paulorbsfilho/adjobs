@@ -9,6 +9,7 @@ export const EMPLOYERS_LIST = BASE_URL + '/employers/';
 export const CANDIDATES_LIST = BASE_URL + '/candidates/';
 export const COMPANIES_LIST = BASE_URL + '/companies/';
 export const JOB_ADVERTISEMENTS_LIST = BASE_URL + '/jobs-advertisements/';
+export const ADVERTISE_JOB = BASE_URL + '/advertise-job/';
 
 const headersToken = new HttpHeaders({
   Authorization: 'Bearer ' + localStorage.getItem('accessToken')

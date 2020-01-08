@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Employer} from '../models/employer';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -10,6 +10,9 @@ import {EmployerResponse} from '../models/employer-response';
   providedIn: 'root'
 })
 export class EmployerService {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
   constructor(private http: HttpClient) {
   }
@@ -43,6 +46,22 @@ export class EmployerService {
       catchError(this.handleError<Employer>(`getHero id=${id}`))
     );
   }
+
+  searchEmployer(term: string): Observable<EmployerResponse> {
+    return this.http.get<EmployerResponse>(`${EMPLOYERS_LIST}/?first_name=${term}`).pipe(
+      catchError(this.handleError<EmployerResponse>('searchCompanies'))
+    );
+  }
+
+  deleteEmployer(employer: Employer | number): Observable<Employer> {
+    const id = typeof employer === 'number' ? employer : employer.pk;
+    const url = `${EMPLOYERS_LIST}/${id}`;
+
+    return this.http.delete<Employer>(url, this.httpOptions).pipe(
+      catchError(this.handleError<Employer>('deleteEmployer'))
+    );
+  }
+
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

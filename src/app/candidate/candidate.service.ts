@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CANDIDATES_LIST} from '../utils/urls';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
@@ -10,8 +10,12 @@ import {CandidateResponse} from '../models/candidate-response';
   providedIn: 'root'
 })
 export class CandidateService {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCandidates(): Observable<Candidate[]> {
     return this.http.get<Candidate[]>(CANDIDATES_LIST)
@@ -40,6 +44,27 @@ export class CandidateService {
     const url = `${CANDIDATES_LIST}/${id}`;
     return this.http.get<Candidate>(url).pipe(
       catchError(this.handleError<Candidate>(`getCandidate id=${id}`))
+    );
+  }
+
+  searchCandidate(term: string): Observable<CandidateResponse> {
+    return this.http.get<CandidateResponse>(`${CANDIDATES_LIST}/?first_name=${term}`).pipe(
+      catchError(this.handleError<CandidateResponse>('searchCandidate'))
+    );
+  }
+
+  deleteCandidate(candidate: Candidate | number): Observable<Candidate> {
+    const id = typeof candidate === 'number' ? candidate : candidate.pk;
+    const url = `${CANDIDATES_LIST}/${id}`;
+
+    return this.http.delete<Candidate>(url, this.httpOptions).pipe(
+      catchError(this.handleError<Candidate>('deleteCandidate'))
+    );
+  }
+
+  updateCandidate(candidate: Candidate): Observable<any> {
+    return this.http.put(CANDIDATES_LIST, candidate, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateCandidate'))
     );
   }
 

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Company} from '../models/company';
 import {catchError, map} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {COMPANIES_LIST} from '../utils/urls';
 import {CompanyResponse} from '../models/company-response';
 
@@ -10,8 +10,12 @@ import {CompanyResponse} from '../models/company-response';
   providedIn: 'root'
 })
 export class CompanyService {
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getCompanies(): Observable<Company[]> {
     return this.http.get<Company[]>(COMPANIES_LIST)
@@ -40,6 +44,27 @@ export class CompanyService {
     const url = `${COMPANIES_LIST}/${id}`;
     return this.http.get<Company>(url).pipe(
       catchError(this.handleError<Company>(`getCompany id=${id}`))
+    );
+  }
+
+  searchCompanies(term: string): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(`${COMPANIES_LIST}/?company_name=${term}`).pipe(
+      catchError(this.handleError<CompanyResponse>('searchCompanies'))
+    );
+  }
+
+  addCompany(company: Company): Observable<Company> {
+    return this.http.post<Company>(COMPANIES_LIST, company, this.httpOptions).pipe(
+      catchError(this.handleError<Company>('addCompany'))
+    );
+  }
+
+  deleteCompany(company: Company | number): Observable<Company> {
+    const id = typeof company === 'number' ? company : company.pk;
+    const url = `${COMPANIES_LIST}/${id}`;
+
+    return this.http.delete<Company>(url, this.httpOptions).pipe(
+      catchError(this.handleError<Company>('deleteCompany'))
     );
   }
 
