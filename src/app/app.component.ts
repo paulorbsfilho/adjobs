@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
     }
 
   redirectToHome() {
-    this.route.navigateByUrl('/');
+    this.route.navigateByUrl('/home');
   }
 
   goHome() {

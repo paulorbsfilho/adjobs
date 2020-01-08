@@ -1,8 +1,8 @@
 <h2>Advertisement Jobs</h2>
 <ul class="advertisementJob">
-  <li *ngFor="let advertisementJob of advertisementJobsResponse.results">
-    <a routerLink="detail/{{advertisementJob.pk}}">
-      <span class="badge">{{advertisementJob.pk}}</span> {{advertisementJob.title}}
+  <li *ngFor="let advertisementJob of advertisementJobsResponse?.results">
+    <a routerLink="detail/{{advertisementJob?.pk}}">
+      <span class="badge">{{advertisementJob?.pk}}</span> {{advertisementJob?.title}}
     </a>
   </li>
 </ul>

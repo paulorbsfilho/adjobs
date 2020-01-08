@@ -1,13 +1,13 @@
 <h1>
   Welcome to {{ title }}!
 </h1>
-<h2>Jobs</h2>
-<ul class="advertisementJobs">
-  <li *ngFor="let advertisementJob of advertisementJobsResponse.results">
-    <a routerLink="jobs/detail/{{advertisementJob.pk}}" routerLinkActive="active">
-      <span class="badge">{{advertisementJob.pk}}</span> {{advertisementJob.title}}
-    </a>
-  </li>
-</ul>
+<!--<h2>Jobs</h2>-->
+<!--<ul class="advertisementJobs">-->
+<!--  <li *ngFor="let advertisementJob of advertisementJobsResponse.results">-->
+<!--    <a routerLink="jobs/detail/{{advertisementJob.pk}}" routerLinkActive="active">-->
+<!--      <span class="badge">{{advertisementJob.pk}}</span> {{advertisementJob.title}}-->
+<!--    </a>-->
+<!--  </li>-->
+<!--</ul>-->
 <router-outlet></router-outlet>
 <a class="navbar-brand" routerLink="" routerLinkActive="active" (click)='goHome()'>Home</a>

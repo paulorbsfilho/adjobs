@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {JwksValidationHandler, OAuthService} from 'angular-oauth2-oidc';
+import {OAuthService} from 'angular-oauth2-oidc';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {AdvertisementJob} from '../../models/advertisement-job';
-import {AdvertisementJobResponse} from '../../models/advertisement-job-response';
 import {AuthService} from '../auth.service';
-import {AdvertisementJobService} from '../../advertisement-job/advertisement-job.service';
+import {Oauth2Response} from '../oauth2Response';
+import {CLIENT_ID, CLIENT_SECRET, LOGIN, URL_TOKEN} from '../../utils/urls';
 
 @Component({
   selector: 'app-auth',
@@ -14,31 +13,34 @@ import {AdvertisementJobService} from '../../advertisement-job/advertisement-job
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  selectedAdvertisementJob: AdvertisementJob;
-  advertisementJobsResponse: AdvertisementJobResponse;
-
-  oauth2Token: string;
-  title = 'ADJobs';
   loginForm: FormGroup;
   registerEmployerForm: FormGroup;
   registerCandidateForm: FormGroup;
   successTextAlert: string;
   errorTextAlert: string;
+  user: object;
 
   text = 'Sou candidato';
   employer = false;
+  private access_token: string;
+  private  oauth2Response: Oauth2Response;
 
   constructor(
     private route: Router,
     private authService: AuthService,
-    private advertisementJobService: AdvertisementJobService,
     private spinner: Ng4LoadingSpinnerService,
+    private oauthService: OAuthService,
   ) {
+    this.oauthService.loginUrl = LOGIN;
+    this.oauthService.clientId = CLIENT_ID;
+    this.oauthService.dummyClientSecret = CLIENT_SECRET;
+    this.oauthService.setStorage(sessionStorage);
+    this.oauthService.tokenEndpoint = URL_TOKEN;
+    this.oauthService.oidc = false;
+    this.oauthService.options = 'Content-Type=application/x-www-form-urlencoded';
   }
 
   ngOnInit(): void {
-    this.getAdvertisementJobsResponse();
-    this.oauth2Token = window.localStorage.getItem('oauth2');
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -73,25 +75,54 @@ export class AuthComponent implements OnInit {
   }
 
   goHome() {
-    if (this.oauth2Token) {
+    if (this.authService) {
       this.redirectToHome();
     }
   }
 
-  onSelect(advertisementJob: AdvertisementJob): void {
-    this.selectedAdvertisementJob = advertisementJob;
+  signIn(loginCredentials) {
+    const username = loginCredentials.username;
+    const password = loginCredentials.password;
+    this.oauthService.scope = 'read:ad write:ad read:employer write:employer';
+    this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(username, password);
+    // this.oauthService.tryLogin({ });
+    // this.oauthService.initImplicitFlow();
+    // this.access_token = this.oauthService.getAccessToken();
   }
 
-  getAdvertisementJobsResponse(): void {
-    this.advertisementJobService.getAdvertisementJobsResponse()
-      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
+  signIn2(loginCredentials) {
+    const username = loginCredentials.username;
+    const password = loginCredentials.password;
+    this.spinner.show();
+    this.authService.doLogin(username, password).subscribe(
+      accessToken => {
+        window.localStorage.setItem('access_token', accessToken);
+        this.access_token = accessToken;
+        this.goHome();
+        this.spinner.hide();
+      },
+      error => {
+        this.errorTextAlert = error;
+        this.spinner.hide();
+      }
+    );
   }
 
-  signIn(value: any) {
-    return;
+  candidateRegister(registerCredentials) {
+    this.spinner.show();
+    this.authService.doCandidateRegister(registerCredentials).subscribe(
+      response => {
+        this.successTextAlert = 'Usuário criado, entre utilizando suas credenciais.';
+        this.spinner.hide();
+      },
+      error => {
+        this.errorTextAlert = error;
+        this.spinner.hide();
+      }
+    );
   }
 
-  register(registerCredentials) {
+  employerRegister(registerCredentials) {
     this.spinner.show();
     this.authService.doEmployerRegister(registerCredentials).subscribe(
       response => {

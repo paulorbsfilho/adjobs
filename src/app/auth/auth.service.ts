@@ -1,22 +1,27 @@
 import {Injectable} from '@angular/core';
 import {Observable, throwError as observableThrowError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {Url, LOGIN, REGISTER_EMPLOYER, REGISTER_CANDIDATE} from '../utils/urls';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {LOGIN, REGISTER_EMPLOYER, REGISTER_CANDIDATE, URL_TOKEN} from '../utils/urls';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  urls = Url;
   httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
+  };
+  httpOptionsReg = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  doLogin(loginCredentials): Observable<any> {
-    return this.http.post(LOGIN, loginCredentials, this.httpOptions).pipe(
+  doLogin(username, password): Observable<any> {
+    // tslint:disable-next-line:max-line-length
+    const body = `grant_type=password&username=${username}&password=${password}&client_id=Oz6VFTP68uv4sOG5bz07cB4lh1UvUUnDI41hGQHO&client_secret=W38ct9oY1ZgezDSmUV2V77kaR1HdVNex9gwQycfGHl4fe2ithwg41mr4aPFR5iP4liFyKw1caZEDxxsLaFtkv5QiH3mgIeLUsdKefaPGHkrY3ZF04uTSoXcyibqAscSI`;
+    return this.http.post(URL_TOKEN, body, this.httpOptions).pipe(
       map((res: Response) => res.headers.get('Authorization').substring(7)));
   }
 
@@ -25,37 +30,20 @@ export class AuthService {
       map((res: Response) => res.headers.get('Authorization').substring(7)));
   }
 
-  // login(username: string, password: string): Observable<any> {
-  //   const params = new HttpParams()
-  //     .set('username', username)
-  //     .set('password', password)
-  //     .set('grant_type', 'password');
-  //   const options = {
-  //     headers: HEADERS_COMMON,
-  //     params
-  //   };
-  //
-  //   return this.http.post<any>(this, params,
-  //     {
-  //       headers: new HttpHeaders().append('Authorization',
-  //         'Basic ' + btoa(`${this.config.config.clientId}:${this.config.config.clientSecret}`)),
-  //     });
-  // }
-
   doEmployerRegister(registerEmployerCredentials): Observable<any> {
     return this.http.post(REGISTER_EMPLOYER,
       {
         username: registerEmployerCredentials.username,
         email: registerEmployerCredentials.email,
         password: registerEmployerCredentials.password,
-        firstName: registerEmployerCredentials.firstName,
-        lastName: registerEmployerCredentials.lastName,
+        first_name: registerEmployerCredentials.firstName,
+        last_name: registerEmployerCredentials.lastName,
         phone: registerEmployerCredentials.phone,
-        companyName: registerEmployerCredentials.companyName,
+        company_name: registerEmployerCredentials.companyName,
         catchPhrase: registerEmployerCredentials.catchPhrase,
         about: registerEmployerCredentials.about
       },
-      this.httpOptions).pipe(
+      this.httpOptionsReg).pipe(
       map((res: Response) => res.body),
       catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
   }
@@ -66,15 +54,15 @@ export class AuthService {
         username: registerCandidateCredentials.username,
         email: registerCandidateCredentials.email,
         password: registerCandidateCredentials.password,
-        firstName: registerCandidateCredentials.firstName,
-        lastName: registerCandidateCredentials.lastName,
+        first_name: registerCandidateCredentials.firstName,
+        last_name: registerCandidateCredentials.lastName,
         phone: registerCandidateCredentials.phone,
-        academicFormation: registerCandidateCredentials.academicFormation,
+        academic_formation: registerCandidateCredentials.academicFormation,
         institution: registerCandidateCredentials.institution,
         bio: registerCandidateCredentials.bio,
         knowledge: registerCandidateCredentials.knowledge
       },
-      this.httpOptions).pipe(
+      this.httpOptionsReg).pipe(
       map((res: Response) => res.body),
       catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
   }
