@@ -20,7 +20,7 @@ export class AuthComponent implements OnInit {
   errorTextAlert: string;
   user: object;
 
-  text = 'Sou candidato';
+  text = 'Sou Empresário';
   employer = false;
   private access_token: string;
   private  oauth2Response: Oauth2Response;
@@ -146,11 +146,11 @@ export class AuthComponent implements OnInit {
 
   changeText(): void {
     this.employer = !this.employer;
-    if (this.employer) {
+    if (!this.employer) {
       this.text = 'Sou Empresário';
     }
-    if (!this.employer) {
-      this.text = 'Sou candidato';
+    if (this.employer) {
+      this.text = 'Sou Candidato';
     }
   }
 }

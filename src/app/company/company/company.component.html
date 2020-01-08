@@ -1,10 +1,10 @@
 <h2>Companies</h2>
 <ul class="companies">
-  <li *ngFor="let company of companiesResponse.results">
-    <a routerLink="/detail/{{company.pk}}">
-      <span class="badge">{{company.pk}}</span> {{company.companyName}}
+  <li *ngFor="let company of companiesResponse?.results">
+    <a routerLink="/detail/{{company?.pk}}">
+      <span class="badge">{{company?.pk}}</span> {{company?.companyName}}
     </a>
   </li>
 </ul>
-<button (click)="goPrevious(companiesResponse.previous)"><</button>
-<button (click)="goNext(companiesResponse.next)">></button>
+<button (click)="goPrevious(companiesResponse?.previous)"><</button>
+<button (click)="goNext(companiesResponse?.next)">></button>
