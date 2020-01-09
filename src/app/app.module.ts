@@ -23,7 +23,6 @@ import {HomeModule} from './home/home.module';
 import { AuthComponent } from './auth/auth/auth.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,19 +33,19 @@ import { AuthComponent } from './auth/auth/auth.component';
     // CompanyComponent,
     // AdvertisementJobComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    OAuthModule.forRoot(),
-    Ng4LoadingSpinnerModule.forRoot(),
-    HomeModule,
-    EmployerModule,
-    CompanyModule,
-    CandidateModule,
-    AdvertisementJobModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        OAuthModule.forRoot(),
+        Ng4LoadingSpinnerModule.forRoot(),
+        HomeModule,
+        EmployerModule,
+        CompanyModule,
+        CandidateModule,
+        AdvertisementJobModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [AuthComponent]

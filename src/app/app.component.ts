@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AdvertisementJobService} from './advertisement-job/advertisement-job.service';
 import {AdvertisementJob} from './models/advertisement-job';
 import {AdvertisementJobResponse} from './models/advertisement-job-response';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import {AdvertisementJobResponse} from './models/advertisement-job-response';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  searchForm: FormGroup;
   selectedAdvertisementJob: AdvertisementJob;
   advertisementJobsResponse: AdvertisementJobResponse;
 
@@ -23,6 +25,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdvertisementJobsResponse();
+    this.searchForm = new FormGroup({
+      term: new FormControl('', Validators.required)
+    });
     }
 
   redirectToHome() {
@@ -42,5 +47,9 @@ export class AppComponent implements OnInit {
   getAdvertisementJobsResponse(): void {
     this.advertisementJobService.getAdvertisementJobsResponse()
       .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
+  }
+
+  searchJob(term) {
+    return;
   }
 }

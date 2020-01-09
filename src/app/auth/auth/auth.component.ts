@@ -24,6 +24,8 @@ export class AuthComponent implements OnInit {
   employer = false;
   private access_token: string;
   private  oauth2Response: Oauth2Response;
+  searchForm: FormGroup;
+  register: boolean;
 
   constructor(
     private route: Router,
@@ -41,6 +43,11 @@ export class AuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.register = false;
+    this.searchForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -85,6 +92,7 @@ export class AuthComponent implements OnInit {
     const password = loginCredentials.password;
     this.oauthService.scope = 'read:ad write:ad read:employer write:employer';
     this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(username, password);
+    // window.sessionStorage.setItem('token', JSON.stringify(data));
     // this.oauthService.tryLogin({ });
     // this.oauthService.initImplicitFlow();
     // this.access_token = this.oauthService.getAccessToken();
@@ -152,5 +160,13 @@ export class AuthComponent implements OnInit {
     if (this.employer) {
       this.text = 'Sou Candidato';
     }
+  }
+
+  changeLoginOrReg(): void {
+    this.register = !this.register;
+  }
+
+  searchJobs(terms) {
+    return;
   }
 }

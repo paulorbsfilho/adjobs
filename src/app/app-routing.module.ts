@@ -14,7 +14,7 @@ import {AppComponent} from './app.component';
 import {AuthGuard} from './auth/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: AppComponent},
+  {path: '', component: AuthComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'auth', component: AuthComponent},
   {path: 'employers', component: EmployerComponent},
