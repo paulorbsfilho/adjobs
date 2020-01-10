@@ -92,6 +92,7 @@ export class AuthComponent implements OnInit {
     const password = loginCredentials.password;
     this.oauthService.scope = 'read:ad write:ad read:employer write:employer';
     this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(username, password);
+    this.user = this.oauthService.loadUserProfile().then(user => this.user = user);
     // window.sessionStorage.setItem('token', JSON.stringify(data));
     // this.oauthService.tryLogin({ });
     // this.oauthService.initImplicitFlow();

@@ -2,6 +2,8 @@ import {HttpHeaders} from '@angular/common/http';
 
 export const BASE_URL = 'http://localhost:8000';
 export const LOGIN = BASE_URL + '/api_auth/login/';
+export const LOGOUT = BASE_URL + '/api_auth/logout/';
+export const USER_IDENTITY = BASE_URL + '/user/:id';
 export const URL_TOKEN = BASE_URL + '/o/token/';
 export const REGISTER_EMPLOYER = BASE_URL + '/sign-up-employer/';
 export const REGISTER_CANDIDATE = BASE_URL + '/sign-up-candidate/';
