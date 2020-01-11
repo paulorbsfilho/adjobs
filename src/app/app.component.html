@@ -7,14 +7,14 @@
 <!--  </li>-->
 <!--</ul>-->
 <a class="navbar-brand" routerLink="" routerLinkActive="active" (click)='goHome()'>Home</a>
-<div class="container">
-  <button (click)="login()" *ngIf="!token">Login</button>
-  <button class="btn btn-outline-primary" (click)="logout()" *ngIf="token">Logout</button>
-</div>
+<!--<div class="container">-->
+<!--  <button (click)="login()" *ngIf="!token">Login</button>-->
+<!--  <button class="btn btn-outline-primary" (click)="logout()" *ngIf="token">Logout</button>-->
+<!--</div>-->
 <!--max-->
 <!--geheim-->
 <div class="container">
-  <router-outlet *ngIf="token"></router-outlet>
+  <router-outlet></router-outlet>
 </div>
 
 

@@ -4,8 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {OAuthService} from 'angular-oauth2-oidc';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {AuthService} from '../auth.service';
-import {Oauth2Response} from '../oauth2Response';
-import {CLIENT_ID, CLIENT_SECRET, LOGIN, URL_TOKEN} from '../../utils/urls';
+import {CLIENT_ID, CLIENT_SECRET, URL_TOKEN} from '../../utils/urls';
 
 @Component({
   selector: 'app-auth',
@@ -23,7 +22,6 @@ export class AuthComponent implements OnInit {
   text = 'Sou Empresário';
   employer = false;
   private access_token: string;
-  private  oauth2Response: Oauth2Response;
   searchForm: FormGroup;
   register: boolean;
 
@@ -33,12 +31,11 @@ export class AuthComponent implements OnInit {
     private spinner: Ng4LoadingSpinnerService,
     private oauthService: OAuthService,
   ) {
-    this.oauthService.loginUrl = LOGIN;
+    this.oauthService.tokenEndpoint = URL_TOKEN;
     this.oauthService.clientId = CLIENT_ID;
     this.oauthService.dummyClientSecret = CLIENT_SECRET;
     this.oauthService.setStorage(sessionStorage);
-    this.oauthService.tokenEndpoint = URL_TOKEN;
-    this.oauthService.oidc = false;
+    this.oauthService.requireHttps = false;
     this.oauthService.options = 'Content-Type=application/x-www-form-urlencoded';
   }
 
@@ -91,7 +88,12 @@ export class AuthComponent implements OnInit {
     const username = loginCredentials.username;
     const password = loginCredentials.password;
     this.oauthService.scope = 'read:ad write:ad read:employer write:employer';
-    this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(username, password);
+    this.oauthService.fetchTokenUsingPasswordFlowAndLoadUserProfile(username, password).then(() => {
+        const claims = this.oauthService.getIdentityClaims();
+      // tslint:disable-next-line:no-console
+        if (claims) { console.debug('given_name', claims); }
+      }
+    );
     this.user = this.oauthService.loadUserProfile().then(user => this.user = user);
     // window.sessionStorage.setItem('token', JSON.stringify(data));
     // this.oauthService.tryLogin({ });

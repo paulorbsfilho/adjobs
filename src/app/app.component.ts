@@ -48,18 +48,18 @@ export class AppComponent implements OnInit {
     });
   }
 
-  login () {
-    this.oauthService.initImplicitFlow();
-  }
-
-  logout() {
-    this.oauthService.logOut();
-  }
-
-  get token() {
-    const claims: any = this.oauthService.getIdentityClaims();
-    return claims ? claims : null;
-  }
+  // login () {
+  //   this.oauthService.initImplicitFlow();
+  // }
+  //
+  // logout() {
+  //   this.oauthService.logOut();
+  // }
+  //
+  // get token() {
+  //   const claims: any = this.oauthService.getIdentityClaims();
+  //   return claims ? claims : null;
+  // }
 
   redirectToHome() {
     this.route.navigateByUrl('/home');
