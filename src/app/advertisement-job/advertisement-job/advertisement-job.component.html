@@ -1,20 +1,20 @@
 <h2>Advertisement Jobs</h2>
-<ul class="advertisementJob">
-  <li *ngFor="let advertisementJob of advertisementJobsResponse?.results">
+<div class="advertisementJob">
+  <div *ngFor="let advertisementJob of advertisementJobsResponse?.results">
 <!--    <a routerLink="detail/{{advertisementJob?.pk}}">-->
 <!--      <span class="badge">{{advertisementJob?.pk}}</span> {{advertisementJob?.title}}-->
 <!--    </a>-->
     <div class="card">
       <div class="card-header">
-        Aberta
+        Anúncio nº {{advertisementJob?.pk}}
       </div>
       <div class="card-body">
         <h5 class="card-title">{{advertisementJob?.title}}</h5>
         <p class="card-text">Salário: {{advertisementJob?.payment}}</p>
-        <a href="#" class="btn btn-primary">Ver detalhes</a>
+        <a routerLink="detail/{{advertisementJob?.pk}}" class="btn btn-primary">Ver detalhes</a>
       </div>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 <button (click)="goPrevious(advertisementJobsResponse.previous)"><</button>
 <button (click)="goNext(advertisementJobsResponse.next)">></button>

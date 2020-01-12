@@ -1,6 +1,6 @@
 <div *ngIf="candidate">
   <h2>{{candidate.firstName | uppercase}} Details</h2>
-  <div><span>id: </span>{{candidate.id}}</div>
+  <div><span>id: </span>{{candidate.pk}}</div>
   <div>
     <label>name:
       <input [(ngModel)]="candidate.firstName" placeholder="Candidate name"/>

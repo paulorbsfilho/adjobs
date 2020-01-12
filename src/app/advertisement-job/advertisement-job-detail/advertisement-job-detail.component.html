@@ -1,5 +1,15 @@
-<div *ngIf="advertisementJob">
-  <h2>{{advertisementJob.title | uppercase}} Details</h2>
-  <div><span>id: </span>{{advertisementJob}}</div>
-  <button (click)="goBack()">go back</button>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{advertisementJob?.title}}</h5>
+    <p class="card-text">{{advertisementJob?.description}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{advertisementJob?.requirements}}</li>
+    <li class="list-group-item">{{advertisementJob?.desirable}}</li>
+    <li class="list-group-item">{{advertisementJob?.company}}</li>
+  </ul>
+  <div class="card-body">
+    <button (click)="goBack()">Voltar</button>
+    <button (click)="goBack()">Candidatar-se</button>
+  </div>
 </div>

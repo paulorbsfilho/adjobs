@@ -5,7 +5,6 @@ import {OAuthService} from 'angular-oauth2-oidc';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {AuthService} from '../auth.service';
 import {CLIENT_ID, CLIENT_SECRET, URL_TOKEN} from '../../utils/urls';
-import {authConfig} from '../oauth.config';
 
 @Component({
   selector: 'app-auth',
@@ -34,7 +33,7 @@ export class AuthComponent implements OnInit {
   ) {
     this.oauthService.oidc = false;
     this.oauthService.strictDiscoveryDocumentValidation = false;
-    this.oauthService.redirectUri = window.location.origin;
+    this.oauthService.redirectUri = window.location.origin  + '/index.html';
     this.oauthService.tokenEndpoint = URL_TOKEN;
     this.oauthService.clientId = CLIENT_ID;
     this.oauthService.dummyClientSecret = CLIENT_SECRET;
@@ -44,6 +43,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {
     this.register = false;
+    this.access_token = this.oauthService.getAccessToken();
     this.searchForm = new FormGroup({
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
@@ -166,9 +166,5 @@ export class AuthComponent implements OnInit {
 
   changeLoginOrReg(): void {
     this.register = !this.register;
-  }
-
-  searchJobs(terms) {
-    return;
   }
 }
