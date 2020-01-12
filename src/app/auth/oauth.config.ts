@@ -1,5 +1,5 @@
 import { AuthConfig } from 'angular-oauth2-oidc';
-import {CLIENT_ID, CLIENT_SECRET, LOGIN, LOGOUT, URL_AUTHORIZE, URL_TOKEN, USER_INFO} from '../utils/urls';
+import {CLIENT_ID, CLIENT_SECRET, URL_TOKEN, USER_INFO} from '../utils/urls';
 
 export const authConfig: AuthConfig = {
 
@@ -22,6 +22,7 @@ export const authConfig: AuthConfig = {
   // issuer: URL_AUTHORIZE,
   // loginUrl: LOGIN,
   // logoutUrl: LOGOUT,
+  requireHttps: false,
   tokenEndpoint: URL_TOKEN,
   userinfoEndpoint: USER_INFO,
   clientId: CLIENT_ID,

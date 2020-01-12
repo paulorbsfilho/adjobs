@@ -5,6 +5,7 @@ import {OAuthService} from 'angular-oauth2-oidc';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {AuthService} from '../auth.service';
 import {CLIENT_ID, CLIENT_SECRET, URL_TOKEN} from '../../utils/urls';
+import {authConfig} from '../oauth.config';
 
 @Component({
   selector: 'app-auth',
@@ -31,11 +32,13 @@ export class AuthComponent implements OnInit {
     private spinner: Ng4LoadingSpinnerService,
     private oauthService: OAuthService,
   ) {
+    this.oauthService.oidc = false;
+    this.oauthService.strictDiscoveryDocumentValidation = false;
+    this.oauthService.redirectUri = window.location.origin;
     this.oauthService.tokenEndpoint = URL_TOKEN;
     this.oauthService.clientId = CLIENT_ID;
     this.oauthService.dummyClientSecret = CLIENT_SECRET;
     this.oauthService.setStorage(sessionStorage);
-    this.oauthService.requireHttps = false;
     this.oauthService.options = 'Content-Type=application/x-www-form-urlencoded';
   }
 
@@ -94,11 +97,7 @@ export class AuthComponent implements OnInit {
         if (claims) { console.debug('given_name', claims); }
       }
     );
-    this.user = this.oauthService.loadUserProfile().then(user => this.user = user);
-    // window.sessionStorage.setItem('token', JSON.stringify(data));
-    // this.oauthService.tryLogin({ });
-    // this.oauthService.initImplicitFlow();
-    // this.access_token = this.oauthService.getAccessToken();
+    this.access_token = this.oauthService.getAccessToken();
   }
 
   signIn2(loginCredentials) {
