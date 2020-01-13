@@ -19,7 +19,23 @@ export class AdvertisementJobService {
   }
 
   getAdvertisementJobs(): Observable<AdvertisementJob[]> {
-    return this.http.get<AdvertisementJob[]>(JOB_ADVERTISEMENTS_LIST)
+    return this.http.get<AdvertisementJob[]>(JOB_ADVERTISEMENTS_LIST, this.httpOptions)
+      .pipe(
+        catchError(this.handleError<AdvertisementJob[]>('getAdvertisementJobs', [])
+        )
+      );
+  }
+
+  goPrevious(previous): Observable<AdvertisementJob[]> {
+    return this.http.get<AdvertisementJob[]>(previous)
+      .pipe(
+        catchError(this.handleError<AdvertisementJob[]>('getAdvertisementJobs', [])
+        )
+      );
+  }
+
+  goNext(next): Observable<AdvertisementJob[]> {
+    return this.http.get<AdvertisementJob[]>(next)
       .pipe(
         catchError(this.handleError<AdvertisementJob[]>('getAdvertisementJobs', [])
         )
@@ -64,7 +80,7 @@ export class AdvertisementJobService {
 
   deleteAdvertisementJob(job: AdvertisementJob | number): Observable<AdvertisementJob> {
     const id = typeof job === 'number' ? job : job.pk;
-    const url = `${JOB_ADVERTISEMENTS_LIST}/${id}`;
+    const url = `${JOB_ADVERTISEMENTS_LIST}${id}`;
 
     return this.http.delete<AdvertisementJob>(url, this.httpOptions).pipe(
       catchError(this.handleError<AdvertisementJob>('deleteAdvertisementJob'))

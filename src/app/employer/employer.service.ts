@@ -55,7 +55,7 @@ export class EmployerService {
 
   deleteEmployer(employer: Employer | number): Observable<Employer> {
     const id = typeof employer === 'number' ? employer : employer.pk;
-    const url = `${EMPLOYERS_LIST}/${id}`;
+    const url = `${EMPLOYERS_LIST}${id}`;
 
     return this.http.delete<Employer>(url, this.httpOptions).pipe(
       catchError(this.handleError<Employer>('deleteEmployer'))

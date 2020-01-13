@@ -32,4 +32,11 @@ export class EmployerDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  delete() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.employerService.deleteEmployer(id)
+      .subscribe(employer => this.employer = employer);
+    this.goBack();
+  }
 }

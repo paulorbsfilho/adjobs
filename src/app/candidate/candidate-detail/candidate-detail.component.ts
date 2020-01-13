@@ -33,4 +33,11 @@ export class CandidateDetailComponent implements OnInit {
     this.location.back();
   }
 
+  delete() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.candidateService.deleteCandidate(id)
+      .subscribe(candidate => this.candidate = candidate);
+    this.goBack();
+  }
+
 }

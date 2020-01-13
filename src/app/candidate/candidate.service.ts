@@ -55,7 +55,7 @@ export class CandidateService {
 
   deleteCandidate(candidate: Candidate | number): Observable<Candidate> {
     const id = typeof candidate === 'number' ? candidate : candidate.pk;
-    const url = `${CANDIDATES_LIST}/${id}`;
+    const url = `${CANDIDATES_LIST}${id}`;
 
     return this.http.delete<Candidate>(url, this.httpOptions).pipe(
       catchError(this.handleError<Candidate>('deleteCandidate'))

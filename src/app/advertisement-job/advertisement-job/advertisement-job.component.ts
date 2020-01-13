@@ -15,12 +15,15 @@ export class AdvertisementJobComponent implements OnInit {
   advertisementJobs: AdvertisementJob[];
   advertisementJobsResponse: AdvertisementJobResponse;
 
+  p: number;
+
   constructor(private advertisementJobService: AdvertisementJobService) {
   }
 
   ngOnInit() {
     this.getAdvertisementJobs();
     this.getAdvertisementJobsResponse();
+    this.p = 1;
   }
 
   onSelect(advertisementJob: AdvertisementJob): void {
@@ -37,11 +40,17 @@ export class AdvertisementJobComponent implements OnInit {
       .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
+  pageChanged(event) {
+    this.p = event;
+  }
+
   goPrevious(previous: string) {
-    return;
+    this.advertisementJobService.goPrevious(previous)
+      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
   }
 
   goNext(next: string) {
-    return;
+    this.advertisementJobService.goPrevious(next)
+      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
   }
 }

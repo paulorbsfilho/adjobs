@@ -33,4 +33,11 @@ export class CompanyDetailComponent implements OnInit {
     this.location.back();
   }
 
+  delete() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.companyService.deleteCompany(id)
+      .subscribe(company => this.company = company);
+    this.goBack();
+  }
+
 }
