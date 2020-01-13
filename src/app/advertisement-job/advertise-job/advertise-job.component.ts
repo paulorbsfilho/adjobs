@@ -36,7 +36,7 @@ export class AdvertiseJobComponent implements OnInit {
         this.errorTextAlert = error;
       }
     );
-    // this.redirectToHome();
+    this.redirectToHome();
   }
 
   redirectToHome() {

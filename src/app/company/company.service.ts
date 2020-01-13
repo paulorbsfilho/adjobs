@@ -3,8 +3,9 @@ import {Observable, of} from 'rxjs';
 import {Company} from '../models/company';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {COMPANIES_LIST} from '../utils/urls';
+import {ADVERTISE_JOB, COMPANIES_LIST} from '../utils/urls';
 import {CompanyResponse} from '../models/company-response';
+import {throwError as observableThrowError} from 'rxjs/internal/observable/throwError';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,18 @@ export class CompanyService {
     return this.http.post<Company>(COMPANIES_LIST, company, this.httpOptions).pipe(
       catchError(this.handleError<Company>('addCompany'))
     );
+  }
+
+  companyRegister(companyInfo): Observable<any> {
+    return this.http.post(ADVERTISE_JOB,
+      {
+        company_name: companyInfo.companyName,
+        catchPhrase: companyInfo.catchPhrase,
+        about: companyInfo.about
+      },
+      this.httpOptions).pipe(
+      map((res: Response) => res.body),
+      catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
   }
 
   deleteCompany(company: Company | number): Observable<Company> {

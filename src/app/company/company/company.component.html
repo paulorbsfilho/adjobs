@@ -1,17 +1,64 @@
-<h2>Companies</h2>
-<div class="advertisementJob">
-  <div *ngFor="let company of companiesResponse?.results">
-    <div class="card">
-      <div class="card-header">
-        Company nº {{company?.pk}}
+<div class="container-xl">
+  <div *ngIf="!showForm">
+    <button class="btn btn-sm btn-success" (click)="showCompanyForm()">Cadastrar uma nova empresa</button>
+  </div>
+  <div *ngIf="showForm">
+    <form [formGroup]="companyForm" (ngSubmit)="registerCompany(companyForm.value)" novalidate>
+      <div class="row">
+        <h2>Cadastrar Nova empresa</h2>
       </div>
-      <div class="card-body">
-        <h5 class="card-title">{{company.company_name | uppercase}}</h5>
-        <p class="card-text">{{company?.catchPhrase}}</p>
-        <a routerLink="detail/{{company?.pk}}" class="btn btn-primary">Ver detalhes</a>
+      <div class="row">
+        <label>
+          <input type="text" class="form-control" formControlName="companyName" placeholder="Empresa"/>
+        </label>
+        <small [hidden]="companyForm.get('companyName')?.valid" class="text-danger">
+          *
+        </small>
+      </div>
+      <div class="row">
+        <label>
+          <input type="text" class="form-control" formControlName="catchPhrase" placeholder="Frase de efeito"/>
+        </label>
+        <small [hidden]="companyForm.get('catchPhrase')?.valid" class="text-danger">
+          *
+        </small>
+      </div>
+      <div class="row">
+        <label>
+          <input type="text" class="form-control" formControlName="about" placeholder="Sobre a empresa"/>
+        </label>
+        <small [hidden]="companyForm.get('about')?.valid" class="text-danger">
+          *
+        </small>
+      </div>
+      <div class="row">
+        <button type="submit" class="btn btn-sm btn-primary" [disabled]="!companyForm.valid" title="Entrar">
+          Cadastrar
+        </button>
+        <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="showCompanyForm()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <h2>Companies</h2>
+    <div class="advertisementJob">
+      <div *ngFor="let company of companiesResponse?.results">
+        <div class="card">
+          <div class="card-header">
+            Company nº {{company?.pk}}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{company.company_name | uppercase}}</h5>
+            <p class="card-text">{{company?.catchPhrase}}</p>
+            <a routerLink="detail/{{company?.pk}}" class="btn btn-primary">Ver detalhes</a>
+          </div>
+        </div>
       </div>
     </div>
+    <button (click)="goPrevious(companiesResponse.previous)"><</button>
+    <button (click)="goNext(companiesResponse.next)">></button>
   </div>
 </div>
-<button (click)="goPrevious(companiesResponse.previous)"><</button>
-<button (click)="goNext(companiesResponse.next)">></button>
+
