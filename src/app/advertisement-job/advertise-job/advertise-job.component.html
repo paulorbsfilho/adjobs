@@ -1,0 +1,63 @@
+<div>
+  <form [formGroup]="advertiseForm" (ngSubmit)="advertiseJob1(advertiseForm.value)" novalidate>
+    <div class="row">
+      <h2>Anunciar vaga de emprego</h2>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="title" placeholder="Titulo"/>
+      </label>
+      <small [hidden]="advertiseForm.get('title')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="description" placeholder="Descrição"/>
+      </label>
+      <small [hidden]="advertiseForm.get('description')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="requirements" placeholder="Requisitos"/>
+      </label>
+      <small [hidden]="advertiseForm.get('requirements')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="desirable" placeholder="Requisitos desejáveis"/>
+      </label>
+      <small [hidden]="advertiseForm.get('desirable')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="payment" placeholder="Salário"/>
+      </label>
+      <small [hidden]="advertiseForm.get('payment')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="company" placeholder="Empresa"/>
+      </label>
+      <small [hidden]="advertiseForm.get('company')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!advertiseForm.valid" title="Entrar">
+        Anunciar
+      </button>
+      <button class="btn btn-sm btn-light" title="Registrar" (click)="redirectToHome()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

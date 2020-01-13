@@ -5,6 +5,7 @@ import {ADVERTISE_JOB, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
 import {catchError, map} from 'rxjs/operators';
 import {AdvertisementJob} from '../models/advertisement-job';
 import {AdvertisementJobResponse} from '../models/advertisement-job-response';
+import {throwError as observableThrowError} from 'rxjs/internal/observable/throwError';
 
 @Injectable({
   providedIn: 'root'
@@ -91,6 +92,21 @@ export class AdvertisementJobService {
     return this.http.put(JOB_ADVERTISEMENTS_LIST, job, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateAdvertisementJob'))
     );
+  }
+
+  advertiseJob(advertiseInfo): Observable<any> {
+    return this.http.post(ADVERTISE_JOB,
+      {
+        title: advertiseInfo.title,
+        description: advertiseInfo.description,
+        requirements: advertiseInfo.requirements,
+        desirable: advertiseInfo.desirable,
+        payment: advertiseInfo.payment,
+        company: advertiseInfo.company,
+      },
+      this.httpOptions).pipe(
+      map((res: Response) => res.body),
+      catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

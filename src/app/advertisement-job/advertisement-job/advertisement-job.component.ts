@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AdvertisementJob} from '../../models/advertisement-job';
 import {AdvertisementJobService} from '../advertisement-job.service';
 import {AdvertisementJobResponse} from '../../models/advertisement-job-response';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class AdvertisementJobComponent implements OnInit {
   advertisementJobsResponse: AdvertisementJobResponse;
 
   p: number;
+  private showJobs: boolean;
 
   constructor(private advertisementJobService: AdvertisementJobService) {
   }
@@ -24,6 +26,7 @@ export class AdvertisementJobComponent implements OnInit {
     this.getAdvertisementJobs();
     this.getAdvertisementJobsResponse();
     this.p = 1;
+    this.showJobs = true;
   }
 
   onSelect(advertisementJob: AdvertisementJob): void {
@@ -52,5 +55,13 @@ export class AdvertisementJobComponent implements OnInit {
   goNext(next: string) {
     this.advertisementJobService.goPrevious(next)
       .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
+  }
+
+  advertiseJob(value: any) {
+    return;
+  }
+
+  changeShowJobs() {
+    this.showJobs = false;
   }
 }

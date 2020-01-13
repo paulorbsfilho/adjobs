@@ -10,6 +10,7 @@ import {CandidateDetailComponent} from './candidate/candidate-detail/candidate-d
 import {AdvertisementJobDetailComponent} from './advertisement-job/advertisement-job-detail/advertisement-job-detail.component';
 import {CompanyDetailComponent} from './company/company-detail/company-detail.component';
 import {AuthComponent} from './auth/auth/auth.component';
+import {AdvertiseJobComponent} from './advertisement-job/advertise-job/advertise-job.component';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './auth/auth.guard';
 
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'companies/detail/:id', component: CompanyDetailComponent},
   {path: 'jobs', component: AdvertisementJobComponent},
   {path: 'jobs/detail/:id', component: AdvertisementJobDetailComponent},
+  {path: 'advertise-job', component: AdvertiseJobComponent},
   { path: '**', redirectTo: '' }
 ];
 
