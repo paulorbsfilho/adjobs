@@ -36,14 +36,14 @@ export class EmployerService {
     return this.http.get<Employer[]>(url)
       .pipe(
         map(employers => employers[0]),
-        catchError(this.handleError<Employer>(`getHero id=${id}`))
+        catchError(this.handleError<Employer>(`getEmployer id=${id}`))
       );
   }
 
   getEmployer(id: number): Observable<Employer> {
-    const url = `${EMPLOYERS_LIST}/${id}`;
+    const url = `${EMPLOYERS_LIST}${id}`;
     return this.http.get<Employer>(url).pipe(
-      catchError(this.handleError<Employer>(`getHero id=${id}`))
+      catchError(this.handleError<Employer>(`getEmployer id=${id}`))
     );
   }
 

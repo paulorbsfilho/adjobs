@@ -1,10 +1,17 @@
 <h2>Candidates</h2>
-<ul class="heroes">
-  <li *ngFor="let candidate of candidatesResponse?.results">
-    <a routerLink="/detail/{{candidate?.pk}}">
-      <span class="badge">{{candidate?.pk}}</span> {{candidate?.firstName}}
-    </a>
-  </li>
-</ul>
-<button (click)="goPrevious(candidatesResponse?.previous)"><</button>
-<button (click)="goNext(candidatesResponse?.next)">></button>
+<div class="candidates">
+  <div *ngFor="let candidate of candidatesResponse?.results">
+    <div class="card">
+      <div class="card-header">
+        Candidato nº {{candidate?.pk}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{candidate?.user.first_name | titlecase}}</h5>
+        <p class="card-text">{{candidate.academic_formation | titlecase}}</p>
+        <a routerLink="detail/{{candidate?.pk}}" class="btn btn-primary">Ver detalhes</a>
+      </div>
+    </div>
+  </div>
+</div>
+<button (click)="goPrevious(candidatesResponse.previous)"><</button>
+<button (click)="goNext(candidatesResponse.next)">></button>

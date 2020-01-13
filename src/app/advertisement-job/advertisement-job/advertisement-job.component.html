@@ -9,7 +9,7 @@
         Anúncio nº {{advertisementJob?.pk}}
       </div>
       <div class="card-body">
-        <h5 class="card-title">{{advertisementJob?.title}}</h5>
+        <h5 class="card-title">{{advertisementJob?.title | uppercase}}</h5>
         <p class="card-text">Salário: {{advertisementJob?.payment}}</p>
         <a routerLink="detail/{{advertisementJob?.pk}}" class="btn btn-primary">Ver detalhes</a>
       </div>

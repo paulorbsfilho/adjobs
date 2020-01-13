@@ -1,10 +1,14 @@
-<div *ngIf="employer">
-  <h2>{{employer.firstName | uppercase}} Details</h2>
-  <div><span>id: </span>{{employer.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="employer.firstName" placeholder="Employer name"/>
-    </label>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{employer?.user.first_name}}</h5>
+    <p class="card-text">Nome completo: {{employer?.user.first_name}} {{employer?.user.last_name}}</p>
   </div>
-  <button (click)="goBack()">go back</button>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Email: {{employer?.user.email}}</li>
+    <li class="list-group-item">Telefone: {{employer?.phone}}</li>
+  </ul>
+  <div class="card-body">
+    <button (click)="goBack()">Voltar</button>
+    <button (click)="goBack()">Candidatar-se</button>
+  </div>
 </div>

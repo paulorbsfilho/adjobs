@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Candidate} from '../../models/candidate';
 import {CandidateService} from '../candidate.service';
 import {CandidateResponse} from '../../models/candidate-response';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-candidate',
@@ -17,20 +19,19 @@ export class CandidateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getCompanies();
-    this.getCompaniesResponse();
+    this.getCandidatesResponse();
   }
 
   onSelect(candidate: Candidate): void {
     this.selectedCandidate = candidate;
   }
 
-  getCompanies(): void {
+  getCandidates(): void {
     this.candidateService.getCandidates()
       .subscribe(candidates => this.candidates = candidates);
   }
 
-  getCompaniesResponse(): void {
+  getCandidatesResponse(): void {
     this.candidateService.getCandidatesResponse()
       .subscribe(candidates => this.candidatesResponse = candidates);
   }

@@ -1,10 +1,14 @@
-<div *ngIf="company">
-  <h2>{{company.companyName | uppercase}} Details</h2>
-  <div><span>id: </span>{{company.id}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="company.companyName" placeholder="Company name"/>
-    </label>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{company?.company_name}}</h5>
+    <p class="card-text">Frase de efeito: {{company?.catchPhrase}}</p>
   </div>
-  <button (click)="goBack()">go back</button>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Sobre: {{company?.about}}</li>
+    <li class="list-group-item">Proprietário: {{company?.owner}}</li>
+  </ul>
+  <div class="card-body">
+    <button (click)="goBack()">Voltar</button>
+    <button (click)="goBack()">Candidatar-se</button>
+  </div>
 </div>

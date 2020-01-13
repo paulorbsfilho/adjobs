@@ -1,10 +1,17 @@
 <h2>Employers</h2>
-<ul class="employers">
-  <li *ngFor="let employer of employersResponse?.results">
-    <a routerLink="/detail/{{employer?.pk}}">
-      <span class="badge">{{employer?.pk}}</span> {{employer?.firstName}}
-    </a>
-  </li>
-</ul>
-<button (click)="goPrevious(employersResponse?.previous)"><</button>
-<button (click)="goNext(employersResponse?.next)">></button>
+<div class="candidates">
+  <div *ngFor="let employer of employersResponse?.results">
+    <div class="card">
+      <div class="card-header">
+        Candidato nº {{employer?.pk}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{employer?.user.first_name | titlecase}}</h5>
+        <p class="card-text">{{employer.phone }}</p>
+        <a routerLink="detail/{{employer?.pk}}" class="btn btn-primary">Ver detalhes</a>
+      </div>
+    </div>
+  </div>
+</div>
+<button (click)="goPrevious(employersResponse.previous)"><</button>
+<button (click)="goNext(employersResponse.next)">></button>

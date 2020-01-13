@@ -41,7 +41,7 @@ export class CandidateService {
   }
 
   getCandidate(id: number): Observable<Candidate> {
-    const url = `${CANDIDATES_LIST}/${id}`;
+    const url = `${CANDIDATES_LIST}${id}`;
     return this.http.get<Candidate>(url).pipe(
       catchError(this.handleError<Candidate>(`getCandidate id=${id}`))
     );

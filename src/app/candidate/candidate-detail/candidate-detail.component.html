@@ -1,10 +1,18 @@
-<div *ngIf="candidate">
-  <h2>{{candidate.firstName | uppercase}} Details</h2>
-  <div><span>id: </span>{{candidate.pk}}</div>
-  <div>
-    <label>name:
-      <input [(ngModel)]="candidate.firstName" placeholder="Candidate name"/>
-    </label>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{candidate?.user.first_name}}</h5>
+    <p class="card-text">Nome completo:{{candidate?.user.first_name}} {{candidate?.user.last_name}}</p>
   </div>
-  <button (click)="goBack()">go back</button>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Bio: {{candidate?.bio}}</li>
+    <li class="list-group-item">Formação acadêmica: {{candidate?.academic_formation}}</li>
+    <li class="list-group-item"> Instituição de ensino: {{candidate?.institution}}</li>
+    <li class="list-group-item">Conhecimentos: {{candidate?.knowledge}}</li>
+    <li class="list-group-item">Email: {{candidate?.user.email}}</li>
+    <li class="list-group-item">Telefone: {{candidate?.phone}}</li>
+  </ul>
+  <div class="card-body">
+    <button (click)="goBack()">Voltar</button>
+    <button (click)="goBack()">Candidatar-se</button>
+  </div>
 </div>

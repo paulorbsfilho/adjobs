@@ -41,7 +41,7 @@ export class CompanyService {
   }
 
   getCompany(id: number): Observable<Company> {
-    const url = `${COMPANIES_LIST}/${id}`;
+    const url = `${COMPANIES_LIST}${id}`;
     return this.http.get<Company>(url).pipe(
       catchError(this.handleError<Company>(`getCompany id=${id}`))
     );

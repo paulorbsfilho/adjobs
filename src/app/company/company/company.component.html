@@ -1,10 +1,17 @@
 <h2>Companies</h2>
-<ul class="companies">
-  <li *ngFor="let company of companiesResponse?.results">
-    <a routerLink="/detail/{{company?.pk}}">
-      <span class="badge">{{company?.pk}}</span> {{company?.companyName}}
-    </a>
-  </li>
-</ul>
-<button (click)="goPrevious(companiesResponse?.previous)"><</button>
-<button (click)="goNext(companiesResponse?.next)">></button>
+<div class="advertisementJob">
+  <div *ngFor="let company of companiesResponse?.results">
+    <div class="card">
+      <div class="card-header">
+        Company nº {{company?.pk}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{company.company_name | uppercase}}</h5>
+        <p class="card-text">{{company?.catchPhrase}}</p>
+        <a routerLink="detail/{{company?.pk}}" class="btn btn-primary">Ver detalhes</a>
+      </div>
+    </div>
+  </div>
+</div>
+<button (click)="goPrevious(companiesResponse.previous)"><</button>
+<button (click)="goNext(companiesResponse.next)">></button>

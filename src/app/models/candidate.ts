@@ -1,12 +1,10 @@
+import {User} from './user';
+
 export class Candidate {
   pk: number;
-  username: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
+  user: User;
   phone: string;
-  academicFormation: string;
+  academic_formation: string;
   institution: string;
   bio: string;
   knowledge: string;

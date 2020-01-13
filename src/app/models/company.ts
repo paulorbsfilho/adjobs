@@ -1,6 +1,9 @@
+import {Employer} from './employer';
+
 export class Company {
   pk: number;
-  companyName: string;
+  company_name: string;
+  owner: Employer;
   catchPhrase: string;
   about: string;
 }
