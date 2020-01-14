@@ -14,6 +14,7 @@ export class CandidateDetailComponent implements OnInit {
   candidate: Candidate;
   private successTextAlert: string;
   private errorTextAlert: string;
+  private show: boolean;
 
   editCandidate: FormGroup;
 
@@ -25,6 +26,7 @@ export class CandidateDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.show = false;
     this.getCandidate();
     this.editCandidate = new FormGroup({
       firstName: new FormControl('', Validators.required),
@@ -67,6 +69,10 @@ export class CandidateDetailComponent implements OnInit {
       }
     );
     this.goBack();
+  }
+
+  showForm() {
+    this.show = !this.show;
   }
 
 }

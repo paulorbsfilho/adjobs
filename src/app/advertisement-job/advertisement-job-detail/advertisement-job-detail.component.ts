@@ -16,6 +16,7 @@ export class AdvertisementJobDetailComponent implements OnInit {
   editAdvertisementJob: FormGroup;
   private successTextAlert: string;
   private errorTextAlert: any;
+  private show: boolean;
 
   constructor(
     private router: Router,
@@ -26,6 +27,7 @@ export class AdvertisementJobDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.show = false;
     this.getAdvertisementJob();
     this.editAdvertisementJob = new FormGroup({
       title: new FormControl('', Validators.required),
@@ -65,5 +67,9 @@ export class AdvertisementJobDetailComponent implements OnInit {
       }
     );
    this.goBack();
+  }
+
+  showForm() {
+    this.show = !this.show;
   }
 }

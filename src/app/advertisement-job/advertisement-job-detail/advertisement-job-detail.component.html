@@ -1,4 +1,7 @@
-<div class="row">
+<div *ngIf="!show">
+  <button class="btn btn-sm" (click)="showForm()">Editar</button>
+</div>
+<div *ngIf="show" class="row">
   <form [formGroup]="editAdvertisementJob" (ngSubmit)="updateJob(editAdvertisementJob.value)" novalidate>
     <div class="row">
       <h2>Editar anúncio</h2>
@@ -61,7 +64,7 @@
       <button type="submit" class="btn btn-sm btn-primary" [disabled]="!editAdvertisementJob.valid" title="Entrar">
         Salvar
       </button>
-      <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="goBack()">
+      <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="showForm()">
         Cancelar
       </button>
     </div>

@@ -1,4 +1,7 @@
-<div class="row">
+<div *ngIf="!show">
+  <button class="btn btn-sm" (click)="showForm()">Editar</button>
+</div>
+<div *ngIf="show" class="row">
   <form [formGroup]="editEmployer" (ngSubmit)="updateJob(editEmployer.value)" novalidate>
     <div class="row">
       <h2>Editar Empresário</h2>
@@ -69,7 +72,6 @@
   </ul>
   <div class="card-body">
     <button (click)="goBack()">Voltar</button>
-    <button (click)="goBack()">Candidatar-se</button>
     <button (click)="delete()">Excluir</button>
   </div>
 </div>

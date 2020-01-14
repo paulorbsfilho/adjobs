@@ -19,6 +19,7 @@ export class EmployerDetailComponent implements OnInit {
   private errorTextAlert: string;
 
   editEmployer: FormGroup;
+  private show: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -66,5 +67,9 @@ export class EmployerDetailComponent implements OnInit {
     this.employerService.deleteEmployer(id)
       .subscribe(employer => this.employer = employer);
     this.goBack();
+  }
+
+  showForm() {
+    this.show = !this.show;
   }
 }

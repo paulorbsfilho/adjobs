@@ -17,6 +17,7 @@ export class CompanyDetailComponent implements OnInit {
   editCompany: FormGroup;
   private successTextAlert: string;
   private errorTextAlert: string;
+  private show: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +64,10 @@ export class CompanyDetailComponent implements OnInit {
     this.companyService.deleteCompany(id)
       .subscribe(company => this.company = company);
     this.goBack();
+  }
+
+  showForm() {
+    this.show = !this.show;
   }
 
 }
