@@ -17,6 +17,7 @@ import {CandidateModule} from './candidate/candidate.module';
 import {AdvertisementJobModule} from './advertisement-job/advertisement-job.module';
 import {HomeModule} from './home/home.module';
 import {AuthComponent} from './auth/auth/auth.component';
+import {UserModule} from './user/user.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {AuthComponent} from './auth/auth/auth.component';
     CandidateModule,
     AdvertisementJobModule,
     NgxPaginationModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

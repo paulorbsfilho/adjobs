@@ -13,11 +13,13 @@ import {AuthComponent} from './auth/auth/auth.component';
 import {AdvertiseJobComponent} from './advertisement-job/advertise-job/advertise-job.component';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './auth/auth.guard';
+import {UserComponent} from './user/user/user.component';
 
 const routes: Routes = [
   {path: '', component: AuthComponent},
   {path: 'home', component: HomeComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'profile', component: UserComponent},
   {path: 'employers', component: EmployerComponent},
   {path: 'employers/detail/:id', component: EmployerDetailComponent},
   {path: 'candidates', component: CandidateComponent},

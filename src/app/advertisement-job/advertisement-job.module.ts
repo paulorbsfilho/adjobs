@@ -7,10 +7,11 @@ import {AdvertisementJobDetailComponent} from './advertisement-job-detail/advert
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AdvertiseJobComponent} from './advertise-job/advertise-job.component';
+import { SearchJobsComponent } from './search-jobs/search-jobs.component';
 
 
 @NgModule({
-  declarations: [AdvertisementJobComponent, AdvertisementJobDetailComponent, AdvertiseJobComponent],
+  declarations: [AdvertisementJobComponent, AdvertisementJobDetailComponent, AdvertiseJobComponent, SearchJobsComponent],
   imports: [
     CommonModule,
     AdvertisementJobRoutingModule,
@@ -18,7 +19,7 @@ import {AdvertiseJobComponent} from './advertise-job/advertise-job.component';
     NgxPaginationModule,
     ReactiveFormsModule
   ],
-  exports: [AdvertisementJobComponent, AdvertisementJobDetailComponent, AdvertiseJobComponent]
+  exports: [AdvertisementJobComponent, AdvertisementJobDetailComponent, AdvertiseJobComponent, SearchJobsComponent]
 })
 export class AdvertisementJobModule {
 }

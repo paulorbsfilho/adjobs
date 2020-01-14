@@ -1,1 +1,58 @@
-<p>user works!</p>
+<!--<div *ngIf="!show">-->
+<!--  <button class="btn btn-sm" (click)="showUserForm()">Editar Perfil</button>-->
+<!--</div>-->
+<div *ngIf="show" class="row">
+  <form [formGroup]="userEdit" (ngSubmit)="updateUser(userEdit.value)" novalidate>
+    <div class="row">
+      <h2>Editar Perfil</h2>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="firstName" value="{{user?.first_name}}"
+               placeholder="Nome"/>
+      </label>
+      <small [hidden]="userEdit.get('firstName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="lastName" value="{{user?.last_name}}"
+               placeholder="Sobrenome"/>
+      </label>
+      <small [hidden]="userEdit.get('lastName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="email" value="{{user?.email}}"
+               placeholder="Email"/>
+      </label>
+      <small [hidden]="userEdit.get('email')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!userEdit.valid" title="Salvar">
+        Salvar
+      </button>
+      <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="showUserForm()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{user?.first_name}}</h5>
+    <p class="card-text">Nome: {{user?.first_name}} {{user?.last_name}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Usuário {{user?.username}}</li>
+    <li class="list-group-item">Email {{user?.email}}</li>
+  </ul>
+  <div class="card-body">
+    <button (click)="redirectToHome()"> Ir para home</button>
+  </div>
+</div>

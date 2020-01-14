@@ -4,6 +4,8 @@ import {AdvertisementJobService} from './advertisement-job/advertisement-job.ser
 import {AdvertisementJob} from './models/advertisement-job';
 import {AdvertisementJobResponse} from './models/advertisement-job-response';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UserService} from './user/user.service';
+import {User} from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,7 @@ export class AppComponent implements OnInit {
   searchForm: FormGroup;
   selectedAdvertisementJob: AdvertisementJob;
   advertisementJobsResponse: AdvertisementJobResponse;
-
+  user: User;
   login: boolean;
 
   title = 'ADJobs';
@@ -22,6 +24,7 @@ export class AppComponent implements OnInit {
   constructor(
     private route: Router,
     private advertisementJobService: AdvertisementJobService,
+    private  userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +37,11 @@ export class AppComponent implements OnInit {
 
   redirectToHome() {
     this.route.navigateByUrl('/home');
+  }
+
+  currentUser () {
+    this.userService.getCurrentUser()
+      .subscribe(user => this.user = user);
   }
 
   goHome() {
