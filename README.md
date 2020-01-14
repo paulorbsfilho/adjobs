@@ -1,5 +1,14 @@
 # Adjobs
 
+Um aplicativo web para anunciar vagas de emprego.
+
+## API Jobs
+Api backend do aplicativo.
+
+https://github.com/paulorbsfilho/web_api_final.git
+
+## Version
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
 
 ## Development server
