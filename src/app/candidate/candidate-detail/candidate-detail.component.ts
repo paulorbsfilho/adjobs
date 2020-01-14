@@ -27,7 +27,6 @@ export class CandidateDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getCandidate();
     this.editCandidate = new FormGroup({
-      pk: new FormControl(''),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),

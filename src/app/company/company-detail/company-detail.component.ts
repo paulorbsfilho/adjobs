@@ -28,7 +28,6 @@ export class CompanyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getCompany();
     this.editCompany = new FormGroup({
-      pk: new FormControl('', Validators.required),
       companyName: new FormControl('', Validators.required),
       catchPhrase: new FormControl('', Validators.required),
       about: new FormControl('', Validators.required),

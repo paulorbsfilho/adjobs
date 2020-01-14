@@ -30,7 +30,6 @@ export class EmployerDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getEmployer();
     this.editEmployer = new FormGroup({
-      pk: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),

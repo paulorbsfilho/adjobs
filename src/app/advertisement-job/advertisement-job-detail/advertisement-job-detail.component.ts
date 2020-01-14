@@ -28,7 +28,6 @@ export class AdvertisementJobDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getAdvertisementJob();
     this.editAdvertisementJob = new FormGroup({
-      pk: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       requirements: new FormControl('', Validators.required),
