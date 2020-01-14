@@ -88,8 +88,9 @@ export class AdvertisementJobService {
     );
   }
 
-  updateAdvertisementJob(job: AdvertisementJob): Observable<any> {
-    return this.http.put(JOB_ADVERTISEMENTS_LIST, job, this.httpOptions).pipe(
+  updateAdvertisementJob(id: number, job: AdvertisementJob): Observable<any> {
+    const url = `${JOB_ADVERTISEMENTS_LIST}${id}`;
+    return this.http.put(url, job, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateAdvertisementJob'))
     );
   }

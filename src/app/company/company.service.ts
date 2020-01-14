@@ -3,9 +3,10 @@ import {Observable, of} from 'rxjs';
 import {Company} from '../models/company';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ADVERTISE_JOB, COMPANIES_LIST} from '../utils/urls';
+import {ADVERTISE_JOB, COMPANIES_LIST, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
 import {CompanyResponse} from '../models/company-response';
 import {throwError as observableThrowError} from 'rxjs/internal/observable/throwError';
+import {AdvertisementJob} from '../models/advertisement-job';
 
 @Injectable({
   providedIn: 'root'
@@ -70,6 +71,13 @@ export class CompanyService {
       this.httpOptions).pipe(
       map((res: Response) => res.body),
       catchError((error: any) => observableThrowError(error.json().error || 'Server error')));
+  }
+
+  updateCompany(id: number, company: Company): Observable<any> {
+    const url = `${COMPANIES_LIST}${id}`;
+    return this.http.put(url, company, this.httpOptions).pipe(
+      catchError(this.handleError<any>('updateCompany'))
+    );
   }
 
   deleteCompany(company: Company | number): Observable<Company> {

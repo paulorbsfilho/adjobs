@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CANDIDATES_LIST} from '../utils/urls';
+import {CANDIDATES_LIST, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Candidate} from '../models/candidate';
 import {CandidateResponse} from '../models/candidate-response';
+import {AdvertisementJob} from '../models/advertisement-job';
 
 @Injectable({
   providedIn: 'root'
@@ -62,8 +63,9 @@ export class CandidateService {
     );
   }
 
-  updateCandidate(candidate: Candidate): Observable<any> {
-    return this.http.put(CANDIDATES_LIST, candidate, this.httpOptions).pipe(
+  updateCandidate(id: number, candidate: Candidate): Observable<any> {
+    const url = `${CANDIDATES_LIST}${id}`;
+    return this.http.put(url, candidate, this.httpOptions).pipe(
       catchError(this.handleError<any>('updateCandidate'))
     );
   }

@@ -1,3 +1,105 @@
+<div class="row">
+  <form [formGroup]="editCandidate" (ngSubmit)="updateJob(editCandidate.value)" novalidate>
+    <div class="row">
+      <h2>Editar candidato</h2>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control " formControlName="pk" readonly value="{{candidate?.pk}}"
+               placeholder="Id"/>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="firstName" value="{{candidate?.user.first_name}}"
+               placeholder="Nome"/>
+      </label>
+      <small [hidden]="editCandidate.get('firstName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="lastName" value="{{candidate?.user.last_name}}"
+               placeholder="Sobrenome"/>
+      </label>
+      <small [hidden]="editCandidate.get('lastName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="username" value="{{candidate?.user.username}}"
+               placeholder="Usuário"/>
+      </label>
+      <small [hidden]="editCandidate.get('username')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="email" value="{{candidate?.user.email}}"
+               placeholder="Email"/>
+      </label>
+      <small [hidden]="editCandidate.get('email')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="phone" value="{{candidate?.phone}}"
+               placeholder="Telefone"/>
+      </label>
+      <small [hidden]="editCandidate.get('phone')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="academicFormation" value="{{candidate?.academic_formation}}"
+               placeholder="Formação acadêmica"/>
+      </label>
+      <small [hidden]="editCandidate.get('academicFormation')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="institution" value="{{candidate?.institution}}"
+               placeholder="Instituição"/>
+      </label>
+      <small [hidden]="editCandidate.get('institution')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="knowledge" value="{{candidate?.knowledge}}"
+               placeholder="Conhecimentos"/>
+      </label>
+      <small [hidden]="editCandidate.get('knowledge')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="bio" value="{{candidate?.bio}}"
+               placeholder="Bio"/>
+      </label>
+      <small [hidden]="editCandidate.get('bio')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!editCandidate.valid" title="Entrar">
+        Salvar
+      </button>
+      <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="goBack()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{candidate?.user.first_name}}</h5>

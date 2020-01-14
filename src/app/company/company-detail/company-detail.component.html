@@ -1,3 +1,60 @@
+<div class="row">
+  <form [formGroup]="editCompany" (ngSubmit)="updateCompany(editCompany.value)" novalidate>
+    <div class="row">
+      <h2>Editar empresa</h2>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control " formControlName="pk" readonly value="{{company?.pk}}"
+               placeholder="Id"/>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="companyName" value="{{company?.company_name}}"
+               placeholder="Titulo"/>
+      </label>
+      <small [hidden]="editCompany.get('companyName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="catchPhrase" value="{{company?.catchPhrase}}"
+               placeholder="Descrição"/>
+      </label>
+      <small [hidden]="editCompany.get('catchPhrase')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="about" value="{{company?.about}}"
+               placeholder="Requisitos"/>
+      </label>
+      <small [hidden]="editCompany.get('about')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="owner" value="{{company?.owner}}"
+               placeholder="Requisitos desejáveis"/>
+      </label>
+      <small [hidden]="editCompany.get('owner')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!editCompany.valid" title="Entrar">
+        Salvar
+      </button>
+      <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="goBack()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{company?.company_name}}</h5>

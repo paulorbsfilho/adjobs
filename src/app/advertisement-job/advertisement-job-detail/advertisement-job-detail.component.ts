@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {AdvertisementJob} from '../../models/advertisement-job';
 import {AdvertisementJobService} from '../advertisement-job.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-advertisement-job-detail',
@@ -12,7 +13,12 @@ import {AdvertisementJobService} from '../advertisement-job.service';
 export class AdvertisementJobDetailComponent implements OnInit {
   advertisementJob: AdvertisementJob;
 
+  editAdvertisementJob: FormGroup;
+  private successTextAlert: string;
+  private errorTextAlert: any;
+
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private advertisementJobService: AdvertisementJobService,
     private location: Location
@@ -21,6 +27,15 @@ export class AdvertisementJobDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAdvertisementJob();
+    this.editAdvertisementJob = new FormGroup({
+      pk: new FormControl('', Validators.required),
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      requirements: new FormControl('', Validators.required),
+      desirable: new FormControl('', Validators.required),
+      payment: new FormControl('', Validators.required),
+      company: new FormControl('', Validators.required),
+    });
   }
 
   getAdvertisementJob(): void {
@@ -38,5 +53,18 @@ export class AdvertisementJobDetailComponent implements OnInit {
     this.advertisementJobService.deleteAdvertisementJob(id)
       .subscribe(advertisementJob => this.advertisementJob = advertisementJob);
     this.goBack();
+  }
+
+  updateJob(jobInfo: AdvertisementJob) {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.advertisementJobService.updateAdvertisementJob(id, jobInfo).subscribe(
+      response => {
+        this.successTextAlert = 'Usuário criado, entre utilizando suas credenciais.';
+      },
+      error => {
+        this.errorTextAlert = error;
+      }
+    );
+   this.goBack();
   }
 }

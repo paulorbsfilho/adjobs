@@ -1,3 +1,69 @@
+<div class="row">
+  <form [formGroup]="editEmployer" (ngSubmit)="updateJob(editEmployer.value)" novalidate>
+    <div class="row">
+      <h2>Editar Empresário</h2>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control " formControlName="pk" readonly value="{{employer?.pk}}"
+               placeholder="Id"/>
+      </label>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="firstName" value="{{employer?.user.first_name}}"
+               placeholder="Nome"/>
+      </label>
+      <small [hidden]="editEmployer.get('firstName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="lastName" value="{{employer?.user.last_name}}"
+               placeholder="Sobrenome"/>
+      </label>
+      <small [hidden]="editEmployer.get('lastName')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="username" value="{{employer?.user.username}}"
+               placeholder="Usuário"/>
+      </label>
+      <small [hidden]="editEmployer.get('username')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="email" value="{{employer?.user.email}}"
+               placeholder="Email"/>
+      </label>
+      <small [hidden]="editEmployer.get('email')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <label>
+        <input type="text" class="form-control" formControlName="phone" value="{{employer?.phone}}"
+               placeholder="Telefone"/>
+      </label>
+      <small [hidden]="editEmployer.get('phone')?.valid" class="text-danger">
+        *
+      </small>
+    </div>
+    <div class="row">
+      <button type="submit" class="btn btn-sm btn-primary" [disabled]="!editEmployer.valid" title="Entrar">
+        Salvar
+      </button>
+      <button class="btn btn-sm btn-outline-danger" title="Registrar" (click)="goBack()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{employer?.user.first_name}}</h5>
