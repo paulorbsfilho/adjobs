@@ -63,16 +63,18 @@ export class CompanyComponent implements OnInit {
     this.showCompanyForm();
   }
 
-  goPrevious(previous: string) {
-    return;
+  goPrevious(previous): void {
+    this.companyService.goPrevious(previous)
+      .subscribe(companiesResponse => this.companiesResponse = companiesResponse);
+  }
+
+  goNext(next) {
+    this.companyService.goNext(next)
+      .subscribe(companiesResponse => this.companiesResponse = companiesResponse);
   }
 
   showCompanyForm() {
     this.showForm = !this.showForm;
-  }
-
-  goNext(next: string) {
-    return;
   }
 
   redirectToHome() {

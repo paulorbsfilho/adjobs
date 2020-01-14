@@ -9,24 +9,12 @@ import {EmployerResponse} from '../../models/employer-response';
   styleUrls: ['./employer.component.css']
 })
 export class EmployerComponent implements OnInit {
-  selectedEmployer: Employer;
-  employers: Employer[];
   employersResponse: EmployerResponse;
 
   constructor(private employerService: EmployerService) { }
 
   ngOnInit() {
-    this.getEmployers();
     this.getEmployersResponse();
-  }
-
-  onSelect(employer: Employer): void {
-    this.selectedEmployer = employer;
-  }
-
-  getEmployers(): void {
-    this.employerService.getEmployers()
-      .subscribe(employers => this.employers = employers);
   }
 
   getEmployersResponse(): void {
@@ -34,11 +22,13 @@ export class EmployerComponent implements OnInit {
       .subscribe(employersResponse => this.employersResponse = employersResponse);
   }
 
-  goPrevious(previous: string) {
-    return;
+  goPrevious(previous) {
+    this.employerService.goPrevious(previous)
+      .subscribe(employersResponse => this.employersResponse = employersResponse);
   }
 
-  goNext(next: string) {
-    return;
+  goNext(next) {
+    this.employerService.goNext(next)
+      .subscribe(employersResponse => this.employersResponse = employersResponse);
   }
 }

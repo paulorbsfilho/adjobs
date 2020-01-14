@@ -3,10 +3,9 @@ import {Observable, of} from 'rxjs';
 import {Company} from '../models/company';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ADVERTISE_JOB, COMPANIES_LIST, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
+import {COMPANIES_LIST} from '../utils/urls';
 import {CompanyResponse} from '../models/company-response';
 import {throwError as observableThrowError} from 'rxjs/internal/observable/throwError';
-import {AdvertisementJob} from '../models/advertisement-job';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +29,22 @@ export class CompanyService {
     return this.http.get<CompanyResponse>(COMPANIES_LIST)
       .pipe(
         catchError(this.handleError<CompanyResponse>('getCompanies'))
+      );
+  }
+
+  goPrevious(previous: string): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(previous)
+      .pipe(
+        catchError(this.handleError<CompanyResponse>('getAdvertisementJobs')
+        )
+      );
+  }
+
+  goNext(next: string): Observable<CompanyResponse> {
+    return this.http.get<CompanyResponse>(next)
+      .pipe(
+        catchError(this.handleError<CompanyResponse>('getAdvertisementJobs')
+        )
       );
   }
 
@@ -62,7 +77,7 @@ export class CompanyService {
   }
 
   companyRegister(companyInfo): Observable<any> {
-    return this.http.post(ADVERTISE_JOB,
+    return this.http.post(COMPANIES_LIST,
       {
         company_name: companyInfo.companyName,
         catchPhrase: companyInfo.catchPhrase,

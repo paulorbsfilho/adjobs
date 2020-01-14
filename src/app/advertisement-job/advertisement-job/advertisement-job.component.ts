@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AdvertisementJob} from '../../models/advertisement-job';
 import {AdvertisementJobService} from '../advertisement-job.service';
 import {AdvertisementJobResponse} from '../../models/advertisement-job-response';
-import {FormGroup} from '@angular/forms';
-
 
 @Component({
   selector: 'app-advertisement-job',
@@ -11,9 +9,6 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./advertisement-job.component.css']
 })
 export class AdvertisementJobComponent implements OnInit {
-
-  selectedAdvertisementJob: AdvertisementJob;
-  advertisementJobs: AdvertisementJob[];
   advertisementJobsResponse: AdvertisementJobResponse;
 
   p: number;
@@ -23,19 +18,9 @@ export class AdvertisementJobComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAdvertisementJobs();
     this.getAdvertisementJobsResponse();
     this.p = 1;
     this.showJobs = true;
-  }
-
-  onSelect(advertisementJob: AdvertisementJob): void {
-    this.selectedAdvertisementJob = advertisementJob;
-  }
-
-  getAdvertisementJobs(): void {
-    this.advertisementJobService.getAdvertisementJobs()
-      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
   }
 
   getAdvertisementJobsResponse(): void {
@@ -47,14 +32,14 @@ export class AdvertisementJobComponent implements OnInit {
     this.p = event;
   }
 
-  goPrevious(previous: string) {
+  goPrevious(previous): void {
     this.advertisementJobService.goPrevious(previous)
-      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
+      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
-  goNext(next: string) {
-    this.advertisementJobService.goPrevious(next)
-      .subscribe(advertisementJobs => this.advertisementJobs = advertisementJobs);
+  goNext(next) {
+    this.advertisementJobService.goNext(next)
+      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
   advertiseJob(value: any) {

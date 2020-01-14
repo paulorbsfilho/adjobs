@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Candidate} from '../../models/candidate';
 import {CandidateService} from '../candidate.service';
 import {CandidateResponse} from '../../models/candidate-response';
-import {Router} from '@angular/router';
-import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-candidate',
@@ -11,8 +8,6 @@ import {Location} from '@angular/common';
   styleUrls: ['./candidate.component.css']
 })
 export class CandidateComponent implements OnInit {
-  selectedCandidate: Candidate;
-  candidates: Candidate[];
   candidatesResponse: CandidateResponse;
 
   constructor(private candidateService: CandidateService) {
@@ -22,25 +17,18 @@ export class CandidateComponent implements OnInit {
     this.getCandidatesResponse();
   }
 
-  onSelect(candidate: Candidate): void {
-    this.selectedCandidate = candidate;
-  }
-
-  getCandidates(): void {
-    this.candidateService.getCandidates()
-      .subscribe(candidates => this.candidates = candidates);
-  }
-
   getCandidatesResponse(): void {
     this.candidateService.getCandidatesResponse()
       .subscribe(candidates => this.candidatesResponse = candidates);
   }
 
-  goPrevious(previous: string) {
-    return;
+  goPrevious(previous): void {
+      this.candidateService.goPrevious(previous)
+      .subscribe(candidatesResponse => this.candidatesResponse = candidatesResponse);
   }
 
-  goNext(next: string) {
-    return;
+  goNext(next) {
+    this.candidateService.goNext(next)
+      .subscribe(candidatesResponse => this.candidatesResponse = candidatesResponse);
   }
 }

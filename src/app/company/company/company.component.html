@@ -57,8 +57,10 @@
         </div>
       </div>
     </div>
-    <button (click)="goPrevious(companiesResponse.previous)"><</button>
-    <button (click)="goNext(companiesResponse.next)">></button>
+    <div *ngIf="companiesResponse?.count > 5">
+      <button (click)="goPrevious(companiesResponse.previous)"><</button>
+      <button (click)="goNext(companiesResponse.next)">></button>
+    </div>
   </div>
 </div>
 

@@ -27,18 +27,18 @@ export class AdvertisementJobService {
       );
   }
 
-  goPrevious(previous): Observable<AdvertisementJob[]> {
-    return this.http.get<AdvertisementJob[]>(previous)
+  goPrevious(previous: string): Observable<AdvertisementJobResponse> {
+    return this.http.get<AdvertisementJobResponse>(previous)
       .pipe(
-        catchError(this.handleError<AdvertisementJob[]>('getAdvertisementJobs', [])
+        catchError(this.handleError<AdvertisementJobResponse>('getAdvertisementJobs')
         )
       );
   }
 
-  goNext(next): Observable<AdvertisementJob[]> {
-    return this.http.get<AdvertisementJob[]>(next)
+  goNext(next: string): Observable<AdvertisementJobResponse> {
+    return this.http.get<AdvertisementJobResponse>(next)
       .pipe(
-        catchError(this.handleError<AdvertisementJob[]>('getAdvertisementJobs', [])
+        catchError(this.handleError<AdvertisementJobResponse>('getAdvertisementJobs')
         )
       );
   }

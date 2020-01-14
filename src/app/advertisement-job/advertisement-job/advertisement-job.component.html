@@ -14,6 +14,8 @@
       </div>
     </div>
   </div>
-  <button (click)="goPrevious(advertisementJobsResponse?.previous)"><</button>
-  <button (click)="goNext(advertisementJobsResponse?.next)">></button>
+  <div *ngIf="advertisementJobsResponse?.count > 5">
+    <button (click)="goPrevious(advertisementJobsResponse?.previous)"><</button>
+    <button (click)="goNext(advertisementJobsResponse?.next)">></button>
+  </div>
 </div>

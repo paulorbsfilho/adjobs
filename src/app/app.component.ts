@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   currentUser () {
-    this.userService.getCurrentUser()
+    this.userService.currentUser()
       .subscribe(user => this.user = user);
   }
 

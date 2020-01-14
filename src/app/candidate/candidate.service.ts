@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {CANDIDATES_LIST, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
+import {CANDIDATES_LIST} from '../utils/urls';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {Candidate} from '../models/candidate';
 import {CandidateResponse} from '../models/candidate-response';
-import {AdvertisementJob} from '../models/advertisement-job';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,22 @@ export class CandidateService {
     return this.http.get<Candidate[]>(CANDIDATES_LIST)
       .pipe(
         catchError(this.handleError<Candidate[]>('getCandidates', []))
+      );
+  }
+
+  goPrevious(previous: string): Observable<CandidateResponse> {
+    return this.http.get<CandidateResponse>(previous)
+      .pipe(
+        catchError(this.handleError<CandidateResponse>('getAdvertisementJobs')
+        )
+      );
+  }
+
+  goNext(next: string): Observable<CandidateResponse> {
+    return this.http.get<CandidateResponse>(next)
+      .pipe(
+        catchError(this.handleError<CandidateResponse>('getAdvertisementJobs')
+        )
       );
   }
 

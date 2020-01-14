@@ -3,9 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Employer} from '../models/employer';
 import {Observable, of} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {EMPLOYERS_LIST, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
+import {EMPLOYERS_LIST} from '../utils/urls';
 import {EmployerResponse} from '../models/employer-response';
-import {AdvertisementJob} from '../models/advertisement-job';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +28,22 @@ export class EmployerService {
     return this.http.get<EmployerResponse>(EMPLOYERS_LIST)
       .pipe(
         catchError(this.handleError<EmployerResponse>('getHeroes'))
+      );
+  }
+
+  goPrevious(previous: string): Observable<EmployerResponse> {
+    return this.http.get<EmployerResponse>(previous)
+      .pipe(
+        catchError(this.handleError<EmployerResponse>('goPrevious')
+        )
+      );
+  }
+
+  goNext(next: string): Observable<EmployerResponse> {
+    return this.http.get<EmployerResponse>(next)
+      .pipe(
+        catchError(this.handleError<EmployerResponse>('goNext')
+        )
       );
   }
 
