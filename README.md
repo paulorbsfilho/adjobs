@@ -9,7 +9,7 @@ https://github.com/paulorbsfilho/web_api_final.git
 
 ## Video
 
-Uploading...
+https://youtu.be/s7HJA1ey8Hk
 
 ## Version
 
