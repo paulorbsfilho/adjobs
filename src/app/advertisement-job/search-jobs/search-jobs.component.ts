@@ -10,27 +10,25 @@ import {AdvertisementJobService} from '../advertisement-job.service';
   styleUrls: ['./search-jobs.component.css']
 })
 export class SearchJobsComponent implements OnInit {
-  // tslint:disable-next-line:no-input-rename
-  @Input('advertisementJobsResponse') advertisementJobsResponse: AdvertisementJobResponse;
-  // tslint:disable-next-line:no-input-rename
-  @Input('user')user: User;
+  advertisementJobsResponse: AdvertisementJobResponse;
+  user: User;
 
   constructor(private route: Router,
               private advertisementJobService: AdvertisementJobService) { }
 
   ngOnInit() {
+    this.advertisementJobService.emitAdvertisementJobs
+      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
-  goPrevious(re: string) {
-    return;
+  goPrevious(previous): void {
+    this.advertisementJobService.goPrevious(previous)
+      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
-  goNext(next: string) {
-    return;
-  }
-
-  searchJob() {
-
+  goNext(next) {
+    this.advertisementJobService.goNext(next)
+      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
 }

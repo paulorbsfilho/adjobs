@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AdvertisementJobService} from './advertisement-job/advertisement-job.service';
 import {AdvertisementJob} from './models/advertisement-job';
@@ -7,6 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from './user/user.service';
 import {User} from './models/user';
 
+// @ts-ignore
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -50,7 +51,8 @@ export class AppComponent implements OnInit {
   searchJob(search) {
     this.advertisementJobService.searchAdvertisementJobsResponse(search)
       .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
-    this.route.navigateByUrl('search-jobs');
+    this.advertisementJobService.emitAdvertisementJobs.emit(this.advertisementJobsResponse);
+    this.route.navigateByUrl('/search-jobs');
   }
 
 }

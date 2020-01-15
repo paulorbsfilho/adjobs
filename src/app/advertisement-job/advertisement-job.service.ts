@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {ADVERTISE_JOB, JOB_ADVERTISEMENTS_LIST} from '../utils/urls';
@@ -12,12 +12,14 @@ import {throwError as observableThrowError} from 'rxjs/internal/observable/throw
 })
 export class AdvertisementJobService {
 
+  constructor(private http: HttpClient) {
+  }
+
+  emitAdvertisementJobs = new EventEmitter<AdvertisementJobResponse>();
+
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-
-  constructor(private http: HttpClient) {
-  }
 
   getAdvertisementJobs(): Observable<AdvertisementJob[]> {
     return this.http.get<AdvertisementJob[]>(JOB_ADVERTISEMENTS_LIST, this.httpOptions)
