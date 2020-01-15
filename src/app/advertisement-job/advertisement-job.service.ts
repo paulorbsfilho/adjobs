@@ -67,15 +67,10 @@ export class AdvertisementJobService {
     );
   }
 
-  searchAdvertisementJobsResponse(term: string): Observable<AdvertisementJobResponse> {
-    return this.http.get<AdvertisementJobResponse>(`${JOB_ADVERTISEMENTS_LIST}/?title=${term}`).pipe(
+  searchAdvertisementJobsResponse(search): Observable<AdvertisementJobResponse> {
+    const title = search.term;
+    return this.http.get<AdvertisementJobResponse>(`${JOB_ADVERTISEMENTS_LIST}?search=${title}`).pipe(
       catchError(this.handleError<AdvertisementJobResponse>('searchAdvertisementJobs'))
-    );
-  }
-
-  addAdvertisementJob(job: AdvertisementJob): Observable<AdvertisementJob> {
-    return this.http.post<AdvertisementJob>(ADVERTISE_JOB, job, this.httpOptions).pipe(
-      catchError(this.handleError<AdvertisementJob>('addAdvertisementJob'))
     );
   }
 

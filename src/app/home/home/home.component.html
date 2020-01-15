@@ -5,7 +5,8 @@
   <a routerLink="/companies" routerLinkActive="active">Companies</a>
 </nav>
 <div>
-  <h2>Advertisement Jobs</h2>
+  <h2>Bem vindo!</h2>
+  <h4>Vagas disponíveis</h4>
   <div class="advertisementJob">
     <div *ngFor="let advertisementJob of advertisementJobsResponse?.results">
       <div class="card">
@@ -13,9 +14,9 @@
           Anúncio nº {{advertisementJob?.pk}}
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{advertisementJob?.title | uppercase}}</h5>
+          <h5 class="card-title">{{advertisementJob?.title}}</h5>
           <p class="card-text">Salário: {{advertisementJob?.payment}}</p>
-          <a routerLink="detail/{{advertisementJob?.pk}}" class="btn btn-primary">Ver detalhes</a>
+          <a routerLink="/jobs/detail/{{advertisementJob?.pk}}" class="btn btn-primary">Ver detalhes</a>
         </div>
       </div>
     </div>
@@ -23,4 +24,3 @@
   <button (click)="goPrevious(advertisementJobsResponse?.previous)"><</button>
   <button (click)="goNext(advertisementJobsResponse?.next)">></button>
 </div>
-<!--<router-outlet></router-outlet>-->

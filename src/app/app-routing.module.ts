@@ -14,6 +14,7 @@ import {AdvertiseJobComponent} from './advertisement-job/advertise-job/advertise
 import {AppComponent} from './app.component';
 import {AuthGuard} from './auth/auth.guard';
 import {UserComponent} from './user/user/user.component';
+import {SearchJobsComponent} from './advertisement-job/search-jobs/search-jobs.component';
 
 const routes: Routes = [
   {path: '', component: AuthComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'companies/detail/:id', component: CompanyDetailComponent},
   {path: 'jobs', component: AdvertisementJobComponent},
   {path: 'jobs/detail/:id', component: AdvertisementJobDetailComponent},
+  {path: 'search-jobs', component: SearchJobsComponent},
   {path: 'advertise-job', component: AdvertiseJobComponent},
   { path: '**', redirectTo: '' }
 ];

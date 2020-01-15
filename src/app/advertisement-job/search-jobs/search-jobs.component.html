@@ -1,1 +1,21 @@
-<p>search-jobs works!</p>
+<div>
+  <h2>Resultado da pesquisa</h2>
+  <div class="advertisementJob">
+    <div *ngFor="let advertisementJob of advertisementJobsResponse?.results">
+      <div class="card">
+        <div class="card-header">
+          Anúncio nº {{advertisementJob?.pk}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{advertisementJob?.title | uppercase}}</h5>
+          <p class="card-text">Salário: {{advertisementJob?.payment}}</p>
+          <a routerLink="/jobs/detail/{{advertisementJob?.pk}}" class="btn btn-primary">Ver detalhes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="advertisementJobsResponse?.count > 5">
+    <button (click)="goPrevious(advertisementJobsResponse?.previous)"><</button>
+    <button (click)="goNext(advertisementJobsResponse?.next)">></button>
+  </div>
+</div>

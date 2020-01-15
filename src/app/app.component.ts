@@ -14,17 +14,15 @@ import {User} from './models/user';
 })
 export class AppComponent implements OnInit {
   searchForm: FormGroup;
-  selectedAdvertisementJob: AdvertisementJob;
   advertisementJobsResponse: AdvertisementJobResponse;
   user: User;
   login: boolean;
-
   title = 'ADJobs';
 
   constructor(
     private route: Router,
     private advertisementJobService: AdvertisementJobService,
-    private  userService: UserService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -44,23 +42,15 @@ export class AppComponent implements OnInit {
       .subscribe(user => this.user = user);
   }
 
-  goHome() {
-    if (this.advertisementJobsResponse) {
-      this.redirectToHome();
-    }
-  }
-
-  onSelect(advertisementJob: AdvertisementJob): void {
-    this.selectedAdvertisementJob = advertisementJob;
-  }
-
   getAdvertisementJobsResponse(): void {
     this.advertisementJobService.getAdvertisementJobsResponse()
       .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
   }
 
-  searchJob(term) {
-    return;
+  searchJob(search) {
+    this.advertisementJobService.searchAdvertisementJobsResponse(search)
+      .subscribe(advertisementJobsResponse => this.advertisementJobsResponse = advertisementJobsResponse);
+    this.route.navigateByUrl('search-jobs');
   }
 
 }

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLink="home">ADJobs</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -13,20 +14,21 @@
         <a class="nav-link" routerLink="advertise-job">Anunciar vaga</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
           <div *ngIf="user">{{user?.username}}</div>
           <div *ngIf="!user">Visitante</div>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="auth">Login</a>
-          <a class="dropdown-item" href="profile">Perfil</a>
+          <a class="dropdown-item" routerLink="auth">Login</a>
+          <a class="dropdown-item" routerLink="profile">Perfil</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Sair</a>
+          <a class="dropdown-item" routerLink="#">Sair</a>
         </div>
       </li>
     </ul>
     <form [formGroup]="searchForm" (ngSubmit)="searchJob(searchForm.value)" class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar vagas" aria-label="Search">
+      <input formControlName="term" class="form-control mr-sm-2" type="search" placeholder="Pesquisar vagas" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
     </form>
   </div>
