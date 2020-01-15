@@ -1,11 +1,15 @@
 # Adjobs
 
-Um aplicativo web para anunciar vagas de emprego.
+A web app for jobs
 
 ## API Jobs
-Api backend do aplicativo.
+Api backend.
 
 https://github.com/paulorbsfilho/web_api_final.git
+
+## Video
+
+
 
 ## Version
 
