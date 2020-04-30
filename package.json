@@ -23,7 +23,7 @@
     "angular-oauth2-oidc": "^8.0.4",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng4-loading-spinner": "latest",
     "ngx-pagination": "^5.0.0",
     "ngx-smart-modal": "latest",
